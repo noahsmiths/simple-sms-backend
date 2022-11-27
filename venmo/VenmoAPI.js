@@ -56,7 +56,7 @@ class VenmoAPI extends EventEmitter {
                         id: tx.ledger_id,
                         memo: tx.memo,
                         amount: tx.amount_in_cents,
-                        customerVenmoId: tx.peer.id
+                        customerVenmoId: tx.peer?.id
                     });
                 }
                 
