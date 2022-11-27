@@ -88,10 +88,8 @@ class VenmoAPI extends EventEmitter {
                     }
                 }
 
-                // let url = getNext ? this.#nextPageURL : `/ledger/transaction-history?actor_id=${this.#id}&page_size=50`;
                 let transactions = await this.#client.get(url);
 
-                // this.#mostRecentTransactionId = transactions?.data?.data?.[0]?.ledger_id || "";
                 this.#nextPageURL = transactions?.data?.pagination?.next || "";
 
                 resolve(transactions.data.data);
