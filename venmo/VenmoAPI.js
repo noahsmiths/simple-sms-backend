@@ -55,7 +55,8 @@ class VenmoAPI extends EventEmitter {
                     this.emit("new-transaction", {
                         id: tx.ledger_id,
                         memo: tx.memo,
-                        amount: tx.amount_in_cents
+                        amount: tx.amount_in_cents,
+                        customerVenmoId: tx.peer.id
                     });
                 }
                 
@@ -76,7 +77,18 @@ class VenmoAPI extends EventEmitter {
     getTransactions(getNext = false) {
         return new Promise(async (resolve, reject) => {
             try {
-                let url = getNext ? this.#nextPageURL : `/ledger/transaction-history?actor_id=${this.#id}&page_size=50`;
+                let url = `/ledger/transaction-history?actor_id=${this.#id}&page_size=50`;
+
+                if (getNext) {
+                    if (this.#nextPageURL?.length > 0) {
+                        url = this.#nextPageURL;
+                    } else {
+                        resolve([]);
+                        return;
+                    }
+                }
+
+                // let url = getNext ? this.#nextPageURL : `/ledger/transaction-history?actor_id=${this.#id}&page_size=50`;
                 let transactions = await this.#client.get(url);
 
                 // this.#mostRecentTransactionId = transactions?.data?.data?.[0]?.ledger_id || "";
