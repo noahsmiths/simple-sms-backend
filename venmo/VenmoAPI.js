@@ -4,17 +4,19 @@ const axios = require('axios');
 class VenmoAPI extends EventEmitter {
     #token;
     #id;
+    #shouldPoll;
     #pollRate;
     #client;
 
     #mostRecentTransactionId = "";
     #nextPageURL = "";
 
-    constructor(token, accountId, pollRate = 5000) {
+    constructor(token, accountId, shouldPoll = true, pollRate = 5000) {
         super();
 
         this.#token = token;
         this.#id = accountId;
+        this.#shouldPoll = shouldPoll;
         this.#pollRate = pollRate;
         this.#client = axios.create({
             baseURL: 'https://api.venmo.com/v1'
@@ -71,7 +73,9 @@ class VenmoAPI extends EventEmitter {
             this.emit('error', err);
         }
 
-        setTimeout(this.checkForNewTransactions.bind(this), this.#pollRate);
+        if (this.#shouldPoll) {
+            setTimeout(this.checkForNewTransactions.bind(this), this.#pollRate);
+        }
     }
 
     getTransactions(getNext = false) {
