@@ -60,6 +60,7 @@ venmo.on('new-transaction', async (tx) => {
             orderId: orderId,
             service: service,
             amount: tx.amount,
+            venmoTransactionId: tx.id,
             customerVenmoId: tx.customerVenmoId
         }
 
