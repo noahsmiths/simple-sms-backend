@@ -1,0 +1,32 @@
+{
+    "services": {
+        "Amazon": {
+            "service_name": "Amazon",
+            "sms_activate_id": "am",
+            "5sim_id": "amazon",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99
+        },
+        "Uber": {
+            "service_name": "Uber",
+            "sms_activate_id": "ub",
+            "5sim_id": "uber",
+            "provider_to_use": "5sim_id",
+            "price_in_cents": 99
+        },
+        "Uber Eats": {
+            "service_name": "Uber Eats",
+            "sms_activate_id": "ub",
+            "5sim_id": "uber",
+            "provider_to_use": "5sim_id",
+            "price_in_cents": 99
+        },
+        "Google": {
+            "service_name": "Google",
+            "sms_activate_id": "go",
+            "5sim_id": "google",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99
+        }
+    }
+}
