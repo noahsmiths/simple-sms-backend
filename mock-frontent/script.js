@@ -16,6 +16,10 @@ socket.on('order-confirmed', () => {
     venmo.closePaymentWindow();
 });
 
+socket.on('invalid-payment', () => {
+    alert("INVALID PAYMENT");
+})
+
 class VenmoClientAPI {
     #paymentLink;
     #paymentWindow;
@@ -29,7 +33,7 @@ class VenmoClientAPI {
             amountInDollars = "0." + amountInDollars;
         }
 
-        this.#paymentLink = `https://venmo.com/?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
+        this.#paymentLink = `https://account.venmo.com/pay?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
         return this.#paymentLink;
     }
 
@@ -51,6 +55,18 @@ class VenmoClientAPI {
 
 const venmo = new VenmoClientAPI();
 
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
 function startOrder() {
-    socket.emit('create-order');
+    // socket.emit('create-order');
+    orderId = uuidv4();
+
+    console.log(`Session ${orderId} started`);
+
+    venmo.generatePaymentLink('simple-sms', 20, `Order:Netflix:${orderId}`);
+    venmo.openPaymentWindow();
 }

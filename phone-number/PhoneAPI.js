@@ -1,11 +1,11 @@
 const axios = require('axios');
 const { EventEmitter } = require('events');
-const services = config.services;
 
 const SMSActivate = require('./SMSActivate');
 const FiveSim = require('./FiveSim');
 
 const config = require('./config.json');
+const services = config.services;
 
 class PhoneAPI extends EventEmitter {
     #SMSActivateAPIKey
@@ -21,16 +21,18 @@ class PhoneAPI extends EventEmitter {
         this.#activeNumbers = new Set();
     }
 
-    getNumberByService(service) {
+    getNumberByService(orderId, service) {
         return new Promise((resolve, reject) => {
-            let serviceDetails = services[service];
-            let provider = serviceDetails?.provider_to_use;
-            let serviceId = serviceDetails[provider];
+            let serviceDetails = services?.[service];
+            let provider = serviceDetails?.['provider_to_use'];
+            let serviceId = serviceDetails?.[provider];
+            let country = serviceDetails?.['country'];
+            let validTime = serviceDetails?.['number_valid_time_in_ms'];
             let api;
 
             switch (provider) {
                 case "sms_activate_id":
-                    api = new SMSActivate(this.#SMSActivateAPIKey);
+                    api = new SMSActivate(this.#SMSActivateAPIKey, orderId);
                 break;
                 case "5sim_id":
                     api = new FiveSim(this.#FiveSimAPIKey);
@@ -41,17 +43,23 @@ class PhoneAPI extends EventEmitter {
                 break;
             }
 
-            api.getNumber(serviceId)
+            api.getNumber(serviceId, country, validTime)
                 .then((instance) => {
-                    this.#activeNumbers.add(instance);
-                    
-                    instance.on('messages-updated', (data) => {
+                    // this.#activeNumbers.add(instance);
 
+                    // instance.on('messages-updated', (data) => {
+
+                    // });
+
+                    // instance.on('number-')
+
+                    // resolve(instance.number);
+                    resolve({
+                        orderId: orderId,
+                        smsInstance: instance,
+                        number: instance.number,
+                        provider: provider
                     });
-
-                    instance.on('number-')
-
-                    resolve(instance.number);
                 })
                 .catch((err) => {
                     reject(err);

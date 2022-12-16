@@ -127,7 +127,11 @@ class VenmoAPI extends EventEmitter {
                     reject(refund?.data);
                 }
             } catch (err) {
-                reject(err);
+                if (err?.response?.data?.error?.title === "Original Transaction settled") {
+                    resolve("Refund complete");
+                } else {
+                    reject(err);
+                }
             }
         })
     }
