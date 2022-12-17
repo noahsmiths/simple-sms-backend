@@ -14,14 +14,18 @@
             "sms_activate_id": "ub",
             "5sim_id": "uber",
             "provider_to_use": "5sim_id",
-            "price_in_cents": 99
+            "price_in_cents": 99,
+            "country": "iausydgf8ig89dfgas8d7fga8sdfg0as 7dgf890asdg f8ad0f8 as8dfasdf",
+            "number_valid_time_in_ms": 1200000
         },
         "Uber Eats": {
             "service_name": "Uber Eats",
             "sms_activate_id": "ub",
             "5sim_id": "uber",
             "provider_to_use": "5sim_id",
-            "price_in_cents": 99
+            "price_in_cents": 99,
+            "country": "x93n987yn98asty89a s89 fasd9 8ftasd869ftasf6t 9astf 9astd faf0",
+            "number_valid_time_in_ms": 1200000
         },
         "Google": {
             "service_name": "Google",

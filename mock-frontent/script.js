@@ -1,4 +1,5 @@
 const socket = io('http://localhost:3000');
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 let orderId;
 
@@ -23,6 +24,7 @@ socket.on('invalid-payment', () => {
 class VenmoClientAPI {
     #paymentLink;
     #paymentWindow;
+    #baseURL = isMobile ? "https://venmo.com/" : "https://account.venmo.com/pay";
 
     generatePaymentLink = (recipient, amountInCents, note) => {
         let amountInDollars = amountInCents.toString();
@@ -33,7 +35,7 @@ class VenmoClientAPI {
             amountInDollars = "0." + amountInDollars;
         }
 
-        this.#paymentLink = `https://account.venmo.com/pay?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
+        this.#paymentLink = `${this.#baseURL}?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
         return this.#paymentLink;
     }
 
@@ -67,6 +69,6 @@ function startOrder() {
 
     console.log(`Session ${orderId} started`);
 
-    venmo.generatePaymentLink('simple-sms', 20, `Order:Netflix:${orderId}`);
+    venmo.generatePaymentLink('simple-sms', 99, `Order:Google:${orderId}`);
     venmo.openPaymentWindow();
 }

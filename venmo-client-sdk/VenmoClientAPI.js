@@ -1,6 +1,9 @@
 class VenmoClientAPI {
+    isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
     #paymentLink;
     #paymentWindow;
+    #baseURL = this.isMobile ? "https://venmo.com/" : "https://account.venmo.com/pay";
 
     generatePaymentLink = (recipient, amountInCents, note) => {
         let amountInDollars = amountInCents.toString();
@@ -11,7 +14,7 @@ class VenmoClientAPI {
             amountInDollars = "0." + amountInDollars;
         }
 
-        this.#paymentLink = `https://venmo.com/?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
+        this.#paymentLink = `${this.#baseURL}?txn=pay&audience=private&recipients=${recipient}&amount=${amountInDollars}&note=${encodeURIComponent(note)}`;
         return this.#paymentLink;
     }
 

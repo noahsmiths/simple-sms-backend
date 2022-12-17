@@ -3,6 +3,7 @@ const VenmoAPI = require('../venmo/VenmoAPI');
 const { MongoClient } = require("mongodb");
 const { Server } = require('socket.io');
 const { v4: uuidv4 } = require('uuid');
+const isValidUUIDV4 = require('is-valid-uuid-v4').isValidUUIDV4;
 const PhoneAPI = require('../phone-number/PhoneAPI');
 const { services } = require('../phone-number/config.json');
 
@@ -87,7 +88,7 @@ venmo.on('new-transaction', async (tx) => {
         let service = parsedTx[1];
         orderId = parsedTx[2];
 
-        if (!(await orderIdIsValid(orderId))) { // Order is invalid
+        if (await orderIdIsValid(orderId)/* !(await orderIdIsValid(orderId)) */) { // Order is invalid
 
             console.log("here 2");
             io.to(orderId).emit('invalid-session');
@@ -271,13 +272,27 @@ const checkPaidAmountMatchesPrice = async (service, amount) => {
     return services[service]?.price_in_cents === amount && typeof amount === 'number';
 }
 
+// const orderIdIsValid = async (id) => {
+//     try {
+//         let isAwaitingPayment = (await awaitingPaymentCollection.findOne({ orderId: id })) !== null;
+//         let notUsed = (await awaitingNumberCollection.findOne({ orderId: id })) === null && (await completedOrderCollection.findOne({ orderId: id })) === null && (await cancelledOrderCollection.findOne({ orderId: id })) === null;
+
+//         return isAwaitingPayment && notUsed;
+//     } catch (err) {
+//         console.log(err);
+//         return false;
+//     }
+// }
 const orderIdIsValid = async (id) => {
     try {
-        //let isAwaitingPayment = (await awaitingPaymentCollection.findOne({ orderId: id })) !== null;
-        let isAwaitingPayment = true;
-        let notUsed = (await awaitingNumberCollection.findOne({ orderId: id })) === null && (await completedOrderCollection.findOne({ orderId: id })) === null && (await cancelledOrderCollection.findOne({ orderId: id })) === null;
-
-        return isAwaitingPayment && notUsed;
+        let isValid = isValidUUIDV4(id);
+        let isCompleted = await collectionHasOrder(completedOrderCollection, id);
+        let isCancelled = await collectionHasOrder(cancelledOrderCollection, id);
+        let isActive = await collectionHasOrder(activeOrderCollection, id);
+        let isAwaitingNumber = await collectionHasOrder(awaitingNumberCollection, id);
+        let isAwaitingFirstText = await collectionHasOrder(awaitingFirstTextCollection, id);
+        
+        return isValid && !isCompleted && !isCancelled && !isActive && !isAwaitingNumber && !isAwaitingFirstText;
     } catch (err) {
         console.log(err);
         return false;
