@@ -280,7 +280,7 @@ const getNumberForOrder = async (orderId, service) => {
     io.to(orderId).emit('order-phone-number', number);
 }
 
-const checkPaidAmountMatchesPrice = async (service, amount) => {
+const checkPaidAmountMatchesPrice = (service, amount) => {
     return services[service]?.price_in_cents === amount && typeof amount === 'number';
 }
 
