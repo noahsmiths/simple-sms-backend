@@ -27,7 +27,7 @@ const activeSMSMonitors = new Map();
 
 const io = new Server({
     cors: {
-        origin: "http://localhost:8080",
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
@@ -53,6 +53,12 @@ io.on('connection', (socket) => {
         // Get order status and send it back with the according event. Can either do events as separate socket.io events or just as a name in a returned object for a general update event
     });
 
+    socket.on('new-order', async (orderId) => {
+        if (await orderIdIsValid(orderId)) {
+            socket.join(orderId);
+        }
+    });
+
     socket.on('cancel-order', async (orderId) => {
         if (await orderCanBeRefunded(orderId)) {
             if (activeSMSMonitors.has(orderId)) {
@@ -69,6 +75,12 @@ io.on('connection', (socket) => {
             socket.emit('order-cancellation-error', { error: "Order cannot be refunded as number has been used." });
         }
     });
+
+    console.log("connection made");
+
+    socket.on('disconnect', () => {
+        console.log("connection lost");
+    })
 });
 
 venmo.on('new-transaction', async (tx) => {
@@ -88,7 +100,7 @@ venmo.on('new-transaction', async (tx) => {
         let service = parsedTx[1];
         orderId = parsedTx[2];
 
-        if (await orderIdIsValid(orderId)/* !(await orderIdIsValid(orderId)) */) { // Order is invalid
+        if (!(await orderIdIsValid(orderId))/* !(await orderIdIsValid(orderId)) */) { // Order is invalid
 
             console.log("here 2");
             io.to(orderId).emit('invalid-session');
@@ -97,7 +109,7 @@ venmo.on('new-transaction', async (tx) => {
             return;
         }
 
-        if (/* Lookup service and check that price paid is valid here */ /*parseInt(tx.amount) !== 20*/checkPaidAmountMatchesPrice(service, parseInt(tx.amount))) {
+        if (/* Lookup service and check that price paid is valid here */ /*parseInt(tx.amount) !== 20*/!checkPaidAmountMatchesPrice(service, parseInt(tx.amount))) {
             console.log("here 3");
             io.to(orderId).emit('invalid-payment');
             await venmo.refundTransaction(tx.id, tx.amount);
@@ -120,9 +132,9 @@ venmo.on('new-transaction', async (tx) => {
         await awaitingNumberCollection.insertOne(order);
         await awaitingPaymentCollection.deleteOne({ orderId: orderId });
 
-        io.to(orderId).emit('order-confirmed');
+        io.to(orderId).emit('order-confirmed', { orderId: orderId });
 
-        getNumberForOrder(orderId, service);
+        // getNumberForOrder(orderId, service);
     } catch (err) {
         console.log(err);
 
@@ -265,7 +277,7 @@ const getNumberForOrder = async (orderId, service) => {
     await awaitingFirstTextCollection.insertOne(order);
     await awaitingNumberCollection.deleteOne({ orderId: orderId });
 
-    io.to(orderId).emit('order-number', number);
+    io.to(orderId).emit('order-phone-number', number);
 }
 
 const checkPaidAmountMatchesPrice = async (service, amount) => {
@@ -291,6 +303,14 @@ const orderIdIsValid = async (id) => {
         let isActive = await collectionHasOrder(activeOrderCollection, id);
         let isAwaitingNumber = await collectionHasOrder(awaitingNumberCollection, id);
         let isAwaitingFirstText = await collectionHasOrder(awaitingFirstTextCollection, id);
+
+        // console.log(isValid);
+        // console.log(isCompleted);
+        // console.log(isCancelled);
+        // console.log(isActive);
+        // console.log(isAwaitingNumber);
+        // console.log(isAwaitingFirstText);
+        // console.log(isValid && !isCompleted && !isCancelled && !isActive && !isAwaitingNumber && !isAwaitingFirstText);
         
         return isValid && !isCompleted && !isCancelled && !isActive && !isAwaitingNumber && !isAwaitingFirstText;
     } catch (err) {
@@ -315,7 +335,7 @@ venmo.on('error', (err) => {
     console.log(err);
 });
 
-const port = 3000;
+const port = 3001;
 io.listen(port);
 
 console.log(`Listening on port *:${port}`);

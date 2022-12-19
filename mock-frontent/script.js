@@ -1,4 +1,4 @@
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost:3001');
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 let orderId;
@@ -70,5 +70,6 @@ function startOrder() {
     console.log(`Session ${orderId} started`);
 
     venmo.generatePaymentLink('simple-sms', 99, `Order:Google:${orderId}`);
+    socket.emit('new-order', orderId);
     venmo.openPaymentWindow();
 }
