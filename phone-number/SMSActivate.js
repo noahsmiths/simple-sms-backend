@@ -2,8 +2,9 @@ const axios = require('axios');
 const { EventEmitter } = require('events');
 
 const API_URL = 'https://api.sms-activate.org/stubs/handler_api.php';
+// const API_URL = 'https://eo2dmg1cvsw26e3.m.pipedream.net';
 
-const MAX_GET_NUMBER_FAILS = 10; // Number of times failure to get number can occur before error
+const MAX_GET_NUMBER_FAILS = 5; // Number of times failure to get number can occur before error
 const MAX_CHECK_STATUS_FAILS = 10;
 
 class SMSActivate extends EventEmitter {
@@ -31,11 +32,14 @@ class SMSActivate extends EventEmitter {
             baseURL: API_URL,
             params: {
                 api_key: this.#APIKey
+            },
+            headers: {
+                'Accept-Encoding': "*"
             }
         });
     }
 
-    getNumber(service, country = 12, validForInMS = 1200000) {
+    getNumber(service, country = 1, validForInMS = 1200000) {
         return new Promise(async (resolve, reject) => {
             let success = false;
             let parsedResponse;
@@ -60,7 +64,7 @@ class SMSActivate extends EventEmitter {
                         break;
                     }
                 } catch (e) {
-
+                    console.log(e);
                 }
             }
 
@@ -164,6 +168,7 @@ class SMSActivate extends EventEmitter {
 
             this.#checkErrors = 0;
         } catch (err) {
+            console.log(err);
             this.#checkErrors++;
         }
 

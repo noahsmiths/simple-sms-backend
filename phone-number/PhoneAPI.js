@@ -66,6 +66,33 @@ class PhoneAPI extends EventEmitter {
                 })
         });
     }
+
+    getSmsInstance(orderId, provider, providerId, number, expiresAt) {
+        return new Promise((resolve, reject) => {
+            let api;
+
+            switch (provider) {
+                case "sms_activate_id":
+                    api = new SMSActivate(this.#SMSActivateAPIKey, orderId);
+                break;
+                case "5sim_id":
+                    api = new FiveSim(this.#FiveSimAPIKey);
+                break;
+                default:
+                    reject("Invalid service.");
+                    return
+                break;
+            }
+
+            api.providerId = providerId;
+            api.number = number;
+            api.expiresAt = expiresAt;
+
+            api.startMonitoring();
+
+            resolve(api);
+        });
+    }
 }
 
 module.exports = PhoneAPI;

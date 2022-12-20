@@ -48,8 +48,34 @@ io.on('connection', (socket) => {
     });
 
     socket.on('get-order', async (orderId) => {
+        if (!orderId) return;
+
         socket.join(orderId);
-        // socket.emit();
+
+        let order;
+        let isCancelled = false;
+
+        if (await collectionHasOrder(cancelledOrderCollection, orderId)) {
+            order = await cancelledOrderCollection.findOne({ orderId: orderId });
+            isCancelled = true;
+        } else if (await collectionHasOrder(completedOrderCollection, orderId)) {
+            order = await completedOrderCollection.findOne({ orderId: orderId });
+        } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
+            order = await activeOrderCollection.findOne({ orderId: orderId });
+        } else if (await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+            order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
+        }
+
+        if (order === undefined) return;
+
+        socket.emit('order', {
+            number: order.number,
+            expiresAt: order.expiresAt - 60000,
+            service: order.service,
+            messages: order.messages,
+            isCancelled: isCancelled
+        });
+        // socket.emit('order');
         // Get order status and send it back with the according event. Can either do events as separate socket.io events or just as a name in a returned object for a general update event
     });
 
@@ -93,6 +119,7 @@ venmo.on('new-transaction', async (tx) => {
         if (parsedTx.length < 3) {
             console.log("here");
             await venmo.refundTransaction(tx.id, tx.amount);
+            io.to(orderId).emit('refunded');
             await awaitingPaymentCollection.deleteOne({ orderId: orderId });
             return;
         }
@@ -105,6 +132,7 @@ venmo.on('new-transaction', async (tx) => {
             console.log("here 2");
             io.to(orderId).emit('invalid-session');
             await venmo.refundTransaction(tx.id, tx.amount);
+            io.to(orderId).emit('refunded');
             await awaitingPaymentCollection.deleteOne({ orderId: orderId });
             return;
         }
@@ -113,6 +141,7 @@ venmo.on('new-transaction', async (tx) => {
             console.log("here 3");
             io.to(orderId).emit('invalid-payment');
             await venmo.refundTransaction(tx.id, tx.amount);
+            io.to(orderId).emit('refunded');
             await awaitingPaymentCollection.deleteOne({ orderId: orderId });
             return;
         }
@@ -134,9 +163,13 @@ venmo.on('new-transaction', async (tx) => {
 
         io.to(orderId).emit('order-confirmed', { orderId: orderId });
 
-        // getNumberForOrder(orderId, service);
+        await getNumberForOrder(orderId, service);
     } catch (err) {
         console.log(err);
+
+        if (orderId && await collectionHasOrder(awaitingNumberCollection, orderId)) {
+            await awaitingNumberCollection.deleteOne({ orderId: orderId });
+        }
 
         venmo.refundTransaction(tx.id, tx.amount)
             .then(() => {
@@ -186,6 +219,15 @@ const getNumberForOrder = async (orderId, service) => {
     order.expiresAt = smsInstance.expiresAt;
     order.messages = [];
 
+    await awaitingFirstTextCollection.insertOne(order);
+    await awaitingNumberCollection.deleteOne({ orderId: orderId });
+
+    monitorSms(smsInstance, orderId);
+
+    io.to(orderId).emit('order-phone-number', number);
+}
+
+const monitorSms = (smsInstance, orderId) => {
     activeSMSMonitors.set(orderId, smsInstance);
 
     smsInstance.on('cancellation-error', (msg) => {
@@ -255,12 +297,21 @@ const getNumberForOrder = async (orderId, service) => {
 
         try {
 
-            // if (await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
-            //     // let order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
+            if (await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+                let order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
 
-
-            // } else 
-            if (await collectionHasOrder(activeOrderCollection, orderId)) {
+                venmo.refundTransaction(order.venmoTransactionId, order.amount)
+                    .then(() => {
+                        if (orderId) {
+                            io.to(orderId).emit('refunded');
+                        }
+                    })
+                    .catch((err) => {
+                        if (orderId) {
+                            io.to(orderId).emit('refund-error');
+                        }
+                    });
+            } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
                 let order = await activeOrderCollection.findOne({ orderId: orderId });
 
                 await completedOrderCollection.insertOne(order);
@@ -273,11 +324,6 @@ const getNumberForOrder = async (orderId, service) => {
         activeSMSMonitors.delete(orderId);
         smsInstance.stopMonitoring(true);
     });
-
-    await awaitingFirstTextCollection.insertOne(order);
-    await awaitingNumberCollection.deleteOne({ orderId: orderId });
-
-    io.to(orderId).emit('order-phone-number', number);
 }
 
 const checkPaidAmountMatchesPrice = (service, amount) => {
@@ -320,9 +366,9 @@ const orderIdIsValid = async (id) => {
 }
 
 const orderCanBeRefunded = async (orderId) => {
-    let isCancelled = await collectionHasOrder(cancelledOrderCollection, orderId) !== null;
-    let isComplete = await collectionHasOrder(completedOrderCollection, orderId) !== null;
-    let isActive = await collectionHasOrder(activeOrderCollection, orderId) !== null;
+    let isCancelled = await collectionHasOrder(cancelledOrderCollection, orderId) === null;
+    let isComplete = await collectionHasOrder(completedOrderCollection, orderId) === null;
+    let isActive = await collectionHasOrder(activeOrderCollection, orderId) === null;
 
     return !isCancelled && !isComplete && !isActive;
 }
@@ -334,6 +380,48 @@ const collectionHasOrder = async (collection, orderId) => {
 venmo.on('error', (err) => {
     console.log(err);
 });
+
+const loadActiveOrders = async () => {
+    let allOrdersWaitingForNumber = await awaitingNumberCollection.find().toArray();
+    let allOrdersWaitingForFirstText = await awaitingFirstTextCollection.find().toArray();
+    let allActiveOrders = await activeOrderCollection.find().toArray();
+
+    let allOrdersWithNumber = allOrdersWaitingForFirstText.concat(allActiveOrders);
+
+    for (let order of allOrdersWaitingForNumber) {
+        let orderId = order.orderId;
+
+        getNumberForOrder(orderId, order.service)
+            .then(() => {
+                console.log(`Loaded order ${orderId}`);
+            })
+            .catch(() => {
+                venmo.refundTransaction(order.venmoTransactionId, order.amount)
+                    .then(() => {
+                        if (orderId) {
+                            io.to(orderId).emit('refunded');
+                        }
+                    })
+                    .catch((err) => {
+                        if (orderId) {
+                            io.to(orderId).emit('refund-error');
+                        }
+                    });
+            });
+    }
+
+    for (let order of allOrdersWithNumber) {
+        let orderId = order.orderId;
+
+        phoneAPI.getSmsInstance(orderId, order.provider, order.providerId, order.number, order.expiresAt)
+            .then((smsInstance) => {
+                monitorSms(smsInstance, orderId);
+            })
+            .catch(console.error);
+    }
+}
+
+loadActiveOrders();
 
 const port = 3001;
 io.listen(port);

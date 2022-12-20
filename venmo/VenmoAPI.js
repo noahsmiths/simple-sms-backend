@@ -1,5 +1,6 @@
 const { EventEmitter } = require('events');
 const axios = require('axios');
+const fs = require('fs');
 
 class VenmoAPI extends EventEmitter {
     #token;
@@ -8,7 +9,8 @@ class VenmoAPI extends EventEmitter {
     #pollRate;
     #client;
 
-    #mostRecentTransactionId = "";
+    // #mostRecentTransactionId = "";
+    #mostRecentTransactionId = fs.existsSync('./newest_tx_id') ? fs.readFileSync('./newest_tx_id').toString() : "";
     #nextPageURL = "";
 
     constructor(token, accountId, shouldPoll = true, pollRate = 5000) {
@@ -29,6 +31,7 @@ class VenmoAPI extends EventEmitter {
             .then((transactions) => {
                 if (transactions.length > 0) {
                     this.#mostRecentTransactionId = transactions[0].ledger_id;
+                    fs.writeFileSync('./newest_tx_id', this.#mostRecentTransactionId);
                 }
 
                 this.checkForNewTransactions();
@@ -69,6 +72,7 @@ class VenmoAPI extends EventEmitter {
             }
 
             this.#mostRecentTransactionId = newestTransactionId;
+            fs.writeFileSync('./newest_tx_id', this.#mostRecentTransactionId);
         } catch (err) {
             this.emit('error', err);
         }
