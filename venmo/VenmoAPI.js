@@ -2,6 +2,7 @@ const { EventEmitter } = require('events');
 const axios = require('axios');
 const fs = require('fs');
 
+// TODO: make sure refunds subtract fees from total
 class VenmoAPI extends EventEmitter {
     #token;
     #id;

@@ -151,7 +151,7 @@ class SMSActivate extends EventEmitter {
                         params: {
                             action: 'setStatus',
                             id: this.providerId,
-                            status: 6
+                            status: 3
                         }
                     });
                 }

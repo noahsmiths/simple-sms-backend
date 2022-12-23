@@ -66,15 +66,23 @@ io.on('connection', (socket) => {
             order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
         }
 
-        if (order === undefined) return;
+        if (!order) return;
 
         socket.emit('order', {
             number: order.number,
             expiresAt: order.expiresAt - 60000,
             service: order.service,
             messages: order.messages,
+            // messages: [{code: "456789", fullText: "Your code is 456789."}, {code: "890432", fullText: "Confirm with code 890432."}],
             isCancelled: isCancelled
         });
+
+        // setTimeout(() => {
+        //     socket.emit('new-message', {
+        //         code: '999999',
+        //         fullText: '999999 is your confirmation code!'
+        //     });
+        // }, 5000);
         // socket.emit('order');
         // Get order status and send it back with the according event. Can either do events as separate socket.io events or just as a name in a returned object for a general update event
     });
@@ -85,6 +93,7 @@ io.on('connection', (socket) => {
         }
     });
 
+    // TODO: Do this
     socket.on('cancel-order', async (orderId) => {
         if (await orderCanBeRefunded(orderId)) {
             if (activeSMSMonitors.has(orderId)) {
@@ -190,6 +199,7 @@ venmo.on('new-transaction', async (tx) => {
     // }
 });
 
+// TODO: better error handling and refund within the function with try and catch. also make sure its removed from awaitingNumber before refunding.
 const getNumberForOrder = async (orderId, service) => {
     let smsInstance;
     let number;
@@ -271,6 +281,7 @@ const monitorSms = (smsInstance, orderId) => {
                 isFirstText = true;
             } else {
                 order = await activeOrderCollection.findOne({ orderId: orderId });
+                if (order.messages[0].code === code && order.messages[0].fullText === fullText) return;
             }
 
             let newMessage = {
@@ -280,7 +291,7 @@ const monitorSms = (smsInstance, orderId) => {
 
             io.to(orderId).emit('new-message', newMessage);
 
-            order.messages.push(newMessage);
+            order.messages.unshift(newMessage);
 
             await activeOrderCollection.replaceOne({ orderId: orderId }, order, { upsert: true });
             
@@ -311,6 +322,9 @@ const monitorSms = (smsInstance, orderId) => {
                             io.to(orderId).emit('refund-error');
                         }
                     });
+
+                    await cancelledOrderCollection.insertOne(order);
+                    await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
             } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
                 let order = await activeOrderCollection.findOne({ orderId: orderId });
 
