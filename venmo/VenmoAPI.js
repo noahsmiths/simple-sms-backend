@@ -62,7 +62,8 @@ class VenmoAPI extends EventEmitter {
                         id: tx.ledger_id,
                         memo: tx.memo,
                         amount: tx.amount_in_cents,
-                        customerVenmoId: tx.peer?.id
+                        customerVenmoId: tx.peer?.id,
+                        audience: tx.audience
                     });
                 }
                 
@@ -108,7 +109,7 @@ class VenmoAPI extends EventEmitter {
         });
     }
 
-    refundTransaction(transactionId, amount) {
+    refundTransaction(transactionId, amount, subtractFee = true) {
         return new Promise(async (resolve, reject) => {
             if (transactionId === undefined || amount === undefined) {
                 reject("Either transactionId, amount, or both were not specified. Both parameters are REQUIRED!");
@@ -116,6 +117,12 @@ class VenmoAPI extends EventEmitter {
             }
 
             try {
+                // let refundAmount = parseInt(amount);
+
+                // if (subtractFee && refundAmount >= 100) {
+                //     refundAmount = refundAmount - Math.ceil(10 + (refundAmount * 0.019));
+                // }
+
                 let refund = await this.#client({
                     method: 'POST',
                     url: '/payments/refund',
@@ -139,6 +146,28 @@ class VenmoAPI extends EventEmitter {
                 }
             }
         })
+    }
+
+    commentOnTransaction(transactionId, comment) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let commentRequest = await this.#client({
+                    method: 'POST',
+                    url: `/stories/${transactionId}/comments`,
+                    data: {
+                        "message": comment
+                    }
+                });
+
+                if (commentRequest.status === 200) {
+                    resolve();
+                } else {
+                    reject(commentRequest.status);
+                }
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
 

@@ -101,11 +101,10 @@ io.on('connection', (socket) => {
 
                 await smsInstance.cancel();
             }
-            // } else if (collectionHasOrder(awaitingNumberCollection, orderId)) {
-
-            // } else if (collectionHasOrder(awaitingFirstTextCollection, orderId)) {
-
+            // else if (collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+                
             // }
+            // else if (collectionHasOrder(awaitingNumberCollection, orderId)) {
         } else {
             socket.emit('order-cancellation-error', { error: "Order cannot be refunded as number has been used." });
         }
@@ -128,13 +127,20 @@ venmo.on('new-transaction', async (tx) => {
         if (parsedTx.length < 3) {
             console.log("here");
             await venmo.refundTransaction(tx.id, tx.amount);
-            io.to(orderId).emit('refunded');
-            await awaitingPaymentCollection.deleteOne({ orderId: orderId });
             return;
         }
 
         let service = parsedTx[1];
         orderId = parsedTx[2];
+
+        if (tx.audience !== "private") {
+            console.log("here 1");
+            io.to(orderId).emit('invalid-audience');
+            await venmo.refundTransaction(tx.id, tx.amount);
+            io.to(orderId).emit('refunded');
+            await awaitingPaymentCollection.deleteOne({ orderId: orderId });
+            return;
+        }
 
         if (!(await orderIdIsValid(orderId))/* !(await orderIdIsValid(orderId)) */) { // Order is invalid
 
@@ -199,7 +205,7 @@ venmo.on('new-transaction', async (tx) => {
     // }
 });
 
-// TODO: better error handling and refund within the function with try and catch. also make sure its removed from awaitingNumber before refunding.
+// this should be done now. TODO: better error handling and refund within the function with try and catch. also make sure its removed from awaitingNumber before refunding.
 const getNumberForOrder = async (orderId, service) => {
     let smsInstance;
     let number;
@@ -213,7 +219,24 @@ const getNumberForOrder = async (orderId, service) => {
         provider = numberRequest.provider;
     } catch (err) {
         io.to(orderId).emit('error-getting-number');
-        throw new Error("Couldn't get phone number for service");
+
+        let order = awaitingNumberCollection.findOne({ orderId: orderId });
+
+        venmo.refundTransaction(order.venmoTransactionId, order.amount)
+            .then(async () => {
+                if (orderId) {
+                    io.to(orderId).emit('refunded');
+                }
+
+                await cancelledOrderCollection.insertOne(order);
+                await awaitingNumberCollection.deleteOne({ orderId: orderId });
+            })
+            .catch((err) => {
+                if (orderId) {
+                    io.to(orderId).emit('refund-error');
+                }
+            });
+        // throw new Error("Couldn't get phone number for service");
     }
 
     let order = await awaitingNumberCollection.findOne({ orderId: orderId });
@@ -235,6 +258,10 @@ const getNumberForOrder = async (orderId, service) => {
     monitorSms(smsInstance, orderId);
 
     io.to(orderId).emit('order-phone-number', number);
+
+    venmo.commentOnTransaction(order.venmoTransactionId, `Your order is now active at: https://simple-sms.io/order/${orderId}`)
+        .then(() => {})
+        .catch(console.err);
 }
 
 const monitorSms = (smsInstance, orderId) => {
