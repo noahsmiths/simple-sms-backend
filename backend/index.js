@@ -48,9 +48,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('get-order', async (orderId) => {
-        if (!orderId) return;
-
-        socket.join(orderId);
+        if (!orderId || !isValidUUIDV4(orderId)) return;
 
         let order;
         let isCancelled = false;
@@ -67,6 +65,8 @@ io.on('connection', (socket) => {
         }
 
         if (!order) return;
+
+        socket.join(orderId);
 
         socket.emit('order', {
             number: order.number,
@@ -261,7 +261,7 @@ const getNumberForOrder = async (orderId, service) => {
 
     venmo.commentOnTransaction(order.venmoTransactionId, `Your order is now active at: https://simple-sms.io/order/${orderId}`)
         .then(() => {})
-        .catch(console.err);
+        .catch(console.error);
 }
 
 const monitorSms = (smsInstance, orderId) => {
@@ -272,6 +272,7 @@ const monitorSms = (smsInstance, orderId) => {
     });
 
     smsInstance.on('cancelled', async (msg) => {
+        console.log('cancelled');
         let orderId = msg.orderId;
 
         try {
@@ -285,13 +286,19 @@ const monitorSms = (smsInstance, orderId) => {
                 await cancelledOrderCollection.insertOne(order);
                 await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
 
-                activeSMSMonitors.delete(orderId);
+                // activeSMSMonitors.delete(orderId);
                 io.to(msg.orderId).emit('order-cancelled');
+            } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
+                let order = await activeOrderCollection.findOne({ orderId: orderId });
+
+                await completedOrderCollection.insertOne(order);
+                await activeOrderCollection.deleteOne({ orderId: orderId });
             }
         } catch (err) {
-            io.to(orderId).emit('order-cancellation-error', { error: 'Error cancelling order and refunding.' });
+            io.to(orderId).emit('order-cancellation-error', { error: 'Error cancelling order.' });
         }
 
+        activeSMSMonitors.delete(orderId);
         smsInstance.stopMonitoring(true);
     });
 
@@ -331,6 +338,7 @@ const monitorSms = (smsInstance, orderId) => {
     });
 
     smsInstance.on('expired', async (msg) => {
+        console.log('expired');
         let orderId = msg.orderId;
 
         try {
@@ -407,9 +415,9 @@ const orderIdIsValid = async (id) => {
 }
 
 const orderCanBeRefunded = async (orderId) => {
-    let isCancelled = await collectionHasOrder(cancelledOrderCollection, orderId) === null;
-    let isComplete = await collectionHasOrder(completedOrderCollection, orderId) === null;
-    let isActive = await collectionHasOrder(activeOrderCollection, orderId) === null;
+    let isCancelled = await collectionHasOrder(cancelledOrderCollection, orderId) !== false;
+    let isComplete = await collectionHasOrder(completedOrderCollection, orderId) !== false;
+    let isActive = await collectionHasOrder(activeOrderCollection, orderId) !== false;
 
     return !isCancelled && !isComplete && !isActive;
 }
@@ -418,9 +426,9 @@ const collectionHasOrder = async (collection, orderId) => {
     return await collection.findOne({ orderId: orderId }) !== null;
 }
 
-venmo.on('error', (err) => {
-    console.log(err);
-});
+// venmo.on('error', (err) => {
+//     console.log(err);
+// });
 
 const loadActiveOrders = async () => {
     let allOrdersWaitingForNumber = await awaitingNumberCollection.find().toArray();

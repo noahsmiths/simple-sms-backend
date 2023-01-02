@@ -151,9 +151,19 @@ class VenmoAPI extends EventEmitter {
     commentOnTransaction(transactionId, comment) {
         return new Promise(async (resolve, reject) => {
             try {
+                let storyId = await this.#client({
+                    method: 'GET',
+                    url: `/ledger/transaction-history/${transactionId}?actor_id=${this.#id}`
+                });
+
+                if (storyId.status !== 200 && storyId?.data?.data?.social_summary?.story_external_id !== undefined) {
+                    reject(storyId.status);
+                    return;
+                }
+
                 let commentRequest = await this.#client({
                     method: 'POST',
-                    url: `/stories/${transactionId}/comments`,
+                    url: `/stories/${storyId?.data?.data?.social_summary?.story_external_id}/comments`,
                     data: {
                         "message": comment
                     }

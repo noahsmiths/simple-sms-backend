@@ -1,0 +1,102 @@
+[
+    {
+        "service_name": "Gett",
+        "service_icon": "simple-icons:gmail",
+        "service_price": 99
+    },
+    {
+        "service_name": "KakaoTalk",
+        "service_icon": "ri:kakao-talk-fill",
+        "service_price": 99
+    },
+    {
+        "service_name": "pof.com",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Yalla",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Naver",
+        "service_icon": "simple-icons:naver",
+        "service_price": 99
+    },
+    {
+        "service_name": "Imo",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Skout",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Wolt",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Careem",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "BIGO LIVE",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Foodpanda",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "JDcom",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "hily",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "DiDi",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Huya",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Potato Chat",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Clubhouse",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "PingPong",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "RedBook",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "CELEBe",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    }
+]

@@ -1,0 +1,256 @@
+[
+    {
+        "service_name": "VKontakte",
+        "service_icon": "uil:vk",
+        "service_price": 99,
+        "service_name_old": "vk.com"
+    },
+    {
+        "service_name": "Whatsapp",
+        "service_icon": "mingcute:whatsapp-fill",
+        "service_price": 99
+    },
+    {
+        "service_name": "Viber",
+        "service_icon": "simple-icons:viber",
+        "service_price": 99
+    },
+    {
+        "service_name": "Telegram",
+        "service_icon": "ic:baseline-telegram",
+        "service_price": 99
+    },
+    {
+        "service_name": "WeChat",
+        "service_icon": "ic:baseline-wechat",
+        "service_price": 99
+    },
+    {
+        "service_name": "Google",
+        "service_icon": "ri:google-fill",
+        "service_price": 99,
+        "service_name_old": "Google,youtube,Gmail"
+    },
+    {
+        "service_name": "YouTube",
+        "service_icon": "mdi:youtube",
+        "service_price": 99,
+        "service_name_old": "Google,youtube,Gmail"
+    },
+    {
+        "service_name": "Gmail",
+        "service_icon": "simple-icons:gmail",
+        "service_price": 99,
+        "service_name_old": "Google,youtube,Gmail"
+    },
+    {
+        "service_name": "facebook",
+        "service_icon": "ic:baseline-facebook",
+        "service_price": 99
+    },
+    {
+        "service_name": "Twitter",
+        "service_icon": "mdi:twitter",
+        "service_price": 99
+    },
+    {
+        "service_name": "Uber",
+        "service_icon": "simple-icons:uber",
+        "service_price": 99
+    },
+    {
+        "service_name": "Instagram",
+        "service_icon": "mdi:instagram",
+        "service_price": 99
+    },
+    {
+        "service_name": "Microsoft",
+        "service_icon": "uil:microsoft",
+        "service_price": 99
+    },
+    {
+        "service_name": "Airbnb",
+        "service_icon": "mingcute:airbnb-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Line messenger",
+        "service_icon": "ri:line-line",
+        "service_price": 99
+    },
+    {
+        "service_name": "Yahoo",
+        "service_icon": "mdi:yahoo",
+        "service_price": 99
+    },
+    {
+        "service_name": "Steam",
+        "service_icon": "mdi:steam",
+        "service_price": 99
+    },
+    {
+        "service_name": "Tinder",
+        "service_icon": "simple-icons:tinder",
+        "service_price": 99
+    },
+    {
+        "service_name": "AOL",
+        "service_icon": "simple-icons:aol",
+        "service_price": 99
+    },
+    {
+        "service_name": "LinkedIN",
+        "service_icon": "ion:logo-linkedin",
+        "service_price": 99
+    },
+    {
+        "service_name": "Tencent QQ",
+        "service_icon": "icon-park:tencent-qq",
+        "service_price": 99
+    },
+    {
+        "service_name": "Netflix",
+        "service_icon": "mdi:netflix",
+        "service_price": 99
+    },
+    {
+        "service_name": "Discord",
+        "service_icon": "ic:baseline-discord",
+        "service_price": 99
+    },
+    {
+        "service_name": "TikTok",
+        "service_icon": "ic:baseline-tiktok",
+        "service_price": 99,
+        "service_name_old": "TikTok/Douyin"
+    },
+    {
+        "service_name": "Zoho",
+        "service_icon": "simple-icons:zoho",
+        "service_price": 99
+    },
+    {
+        "service_name": "Ticketmaster",
+        "service_icon": "simple-icons:ticketmaster",
+        "service_price": 99
+    },
+    {
+        "service_name": "Amazon",
+        "service_icon": "ri:amazon-fill",
+        "service_price": 99
+    },
+    {
+        "service_name": "ProtonMail",
+        "service_icon": "arcticons:proton-mail",
+        "service_price": 99
+    },
+    {
+        "service_name": "Snapchat",
+        "service_icon": "ic:baseline-snapchat",
+        "service_price": 99
+    },
+    {
+        "service_name": "Alipay",
+        "service_icon": "ri:alipay-fill",
+        "service_price": 99,
+        "service_name_old": "Alipay/Alibaba"
+    },
+    {
+        "service_name": "Alibaba",
+        "service_icon": "simple-icons:alibabadotcom",
+        "service_price": 99,
+        "service_name_old": "Alipay/Alibaba"
+    },
+    {
+        "service_name": "Nike",
+        "service_icon": "simple-icons:nike",
+        "service_price": 99
+    },
+    {
+        "service_name": "eBay",
+        "service_icon": "jam:ebay",
+        "service_price": 99
+    },
+    {
+        "service_name": "Grindr",
+        "service_icon": "tabler:brand-grindr",
+        "service_price": 99
+    },
+    {
+        "service_name": "PayPal",
+        "service_icon": "ic:baseline-paypal",
+        "service_price": 99
+    },
+    {
+        "service_name": "Blizzard",
+        "service_icon": "simple-icons:activision",
+        "service_price": 99
+    },
+    {
+        "service_name": "Craigslist",
+        "service_icon": "arcticons:craigslist",
+        "service_price": 99
+    },
+    {
+        "service_name": "OfferUp",
+        "service_icon": "arcticons:offerup",
+        "service_price": 99
+    },
+    {
+        "service_name": "Moneylion",
+        "service_icon": "game-icons:lion",
+        "service_price": 99
+    },
+    {
+        "service_name": "Apple",
+        "service_icon": "ic:baseline-apple",
+        "service_price": 99
+    },
+    {
+        "service_name": "Twitch",
+        "service_icon": "mdi:twitch",
+        "service_price": 99
+    },
+    {
+        "service_name": "Wise",
+        "service_icon": "simple-icons:wise",
+        "service_price": 99
+    },
+    {
+        "service_name": "CourseHero",
+        "service_icon": "tabler:badge",
+        "service_price": 99
+    },
+    {
+        "service_name": "Google Voice",
+        "service_icon": "arcticons:google-voice",
+        "service_price": 99,
+        "service_name_old": "GoogleVoice"
+    },
+    {
+        "service_name": "Lyft",
+        "service_icon": "simple-icons:lyft",
+        "service_price": 99
+    },
+    {
+        "service_name": "Skype",
+        "service_icon": "mdi:skype",
+        "service_price": 99
+    },
+    {
+        "service_name": "Bumble",
+        "service_icon": "tabler:brand-bumble",
+        "service_price": 99
+    },
+    {
+        "service_name": "DoorDash",
+        "service_icon": "simple-icons:doordash",
+        "service_price": 99
+    },
+    {
+        "service_name": "Any other",
+        "service_icon": "zondicons:dial-pad",
+        "service_price": 99,
+        "service_name_old": "Any other"
+    }
+]
