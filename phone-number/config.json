@@ -99,6 +99,15 @@
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
+        "Uber Eats": {
+            "service_name": "Uber Eats",
+            "sms_activate_id": "ub",
+            "5sim_id": "uber",
+            "provider_to_use": "5sim_id",
+            "price_in_cents": 99,
+            "country": "usa",
+            "number_valid_time_in_ms": 1200000
+        },
         "Instagram": {
             "service_name": "Instagram",
             "sms_activate_id": "ig",
@@ -390,10 +399,10 @@
         "Google Voice": {
             "service_name": "Google Voice",
             "sms_activate_id": "gf",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "googlevoice",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Lyft": {

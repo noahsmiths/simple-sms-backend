@@ -20,20 +20,22 @@ class FiveSim extends EventEmitter {
     expiresAt
     messages
 
-    constructor(_key, _orderId, _pollRate = 10) {
+    constructor(_key, _orderId, _pollRate = 5000) {
         super();
 
         this.#APIKey = _key;
         this.orderId = _orderId;
-        this.#pollRate = this._pollRate;
+        this.#pollRate = _pollRate;
 
         this.#client = axios.create({
             baseURL: API_URL,
             headers: {
-                'Authorization': `Bearer ${this.#APIKey}}`,
+                'Authorization': `Bearer ${this.#APIKey}`,
                 'Accept': 'application/json'
             }
         });
+
+        this.messages = [];
     }
 
     getNumber(service, country = 1, validForInMS = 1200000, operator = 'virtual8') {
@@ -81,7 +83,7 @@ class FiveSim extends EventEmitter {
         try {
             let cancellation = await this.#client({
                 method: 'GET',
-                url: `/cancel/${providerId}`
+                url: `/cancel/${this.providerId}`
             });
 
             if (!this.#shouldPoll) {
@@ -89,6 +91,7 @@ class FiveSim extends EventEmitter {
                 this.#monitor();
             }
         } catch (err) {
+            console.log(err);
             this.emit('cancellation-error', { orderId: this.orderId, error: err });
         }
     }

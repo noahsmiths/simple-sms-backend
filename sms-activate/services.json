@@ -59,6 +59,11 @@
         "service_price": 99
     },
     {
+        "service_name": "Uber Eats",
+        "service_icon": "simple-icons:ubereats",
+        "service_price": 99
+    },
+    {
         "service_name": "Instagram",
         "service_icon": "mdi:instagram",
         "service_price": 99

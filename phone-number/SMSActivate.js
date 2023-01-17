@@ -22,12 +22,12 @@ class SMSActivate extends EventEmitter {
     expiresAt
     messages
 
-    constructor(_key, _orderId, _pollRate = 10) {
+    constructor(_key, _orderId, _pollRate = 5000) {
         super();
 
         this.#APIKey = _key;
         this.orderId = _orderId;
-        this.#pollRate = this._pollRate;
+        this.#pollRate = _pollRate;
 
         this.#client = axios.create({
             baseURL: API_URL,

@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
             // }
             // else if (collectionHasOrder(awaitingNumberCollection, orderId)) {
         } else {
-            socket.emit('order-cancellation-error', { error: "Order cannot be refunded as number has been used." });
+            socket.emit('order-cancellation-error', { error: "Order cannot be cancelled as number has been used." });
         }
     });
 
