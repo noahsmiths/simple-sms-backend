@@ -70,7 +70,8 @@ io.on('connection', (socket) => {
 
         socket.emit('order', {
             number: order.number,
-            expiresAt: order.expiresAt - 60000,
+            // expiresAt: order.expiresAt - 60000,
+            expiresAt: order.expiresAt,
             service: order.service,
             messages: order.messages,
             // messages: [{code: "456789", fullText: "Your code is 456789."}, {code: "890432", fullText: "Confirm with code 890432."}],
@@ -373,6 +374,10 @@ const monitorSms = (smsInstance, orderId) => {
         activeSMSMonitors.delete(orderId);
         smsInstance.stopMonitoring(true);
     });
+
+    smsInstance.on('invalid', async (msg) => {
+        let orderId = msg.orderId;
+    });
 }
 
 const checkPaidAmountMatchesPrice = (service, amount) => {
@@ -462,7 +467,7 @@ const loadActiveOrders = async () => {
     for (let order of allOrdersWithNumber) {
         let orderId = order.orderId;
 
-        phoneAPI.getSmsInstance(orderId, order.provider, order.providerId, order.number, order.expiresAt)
+        phoneAPI.getSmsInstance(orderId, order.provider, order.providerId, order.number, order.expiresAt, order.messages)
             .then((smsInstance) => {
                 monitorSms(smsInstance, orderId);
             })

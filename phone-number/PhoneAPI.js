@@ -35,7 +35,7 @@ class PhoneAPI extends EventEmitter {
                     api = new SMSActivate(this.#SMSActivateAPIKey, orderId);
                 break;
                 case "5sim_id":
-                    api = new FiveSim(this.#FiveSimAPIKey);
+                    api = new FiveSim(this.#FiveSimAPIKey, orderId);
                 break;
                 default:
                     reject("Invalid service.");
@@ -67,7 +67,7 @@ class PhoneAPI extends EventEmitter {
         });
     }
 
-    getSmsInstance(orderId, provider, providerId, number, expiresAt) {
+    getSmsInstance(orderId, provider, providerId, number, expiresAt, messages) {
         return new Promise((resolve, reject) => {
             let api;
 
@@ -76,17 +76,18 @@ class PhoneAPI extends EventEmitter {
                     api = new SMSActivate(this.#SMSActivateAPIKey, orderId);
                 break;
                 case "5sim_id":
-                    api = new FiveSim(this.#FiveSimAPIKey);
+                    api = new FiveSim(this.#FiveSimAPIKey, orderId);
                 break;
                 default:
                     reject("Invalid service.");
-                    return
+                    return;
                 break;
             }
 
             api.providerId = providerId;
             api.number = number;
             api.expiresAt = expiresAt;
+            api.messages = messages;
 
             api.startMonitoring();
 

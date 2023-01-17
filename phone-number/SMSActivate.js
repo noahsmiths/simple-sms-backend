@@ -20,6 +20,7 @@ class SMSActivate extends EventEmitter {
     providerId
     number
     expiresAt
+    messages
 
     constructor(_key, _orderId, _pollRate = 10) {
         super();
@@ -39,7 +40,7 @@ class SMSActivate extends EventEmitter {
         });
     }
 
-    getNumber(service, country = 1, validForInMS = 1200000) {
+    getNumber(service, country = 12, validForInMS = 1200000) {
         return new Promise(async (resolve, reject) => {
             let success = false;
             let parsedResponse;
@@ -71,7 +72,8 @@ class SMSActivate extends EventEmitter {
             if (success) {
                 this.providerId = parsedResponse[1];
                 this.number = parsedResponse[2];
-                this.expiresAt = Date.now() + validForInMS + 60000; // Add extra minute
+                // this.expiresAt = Date.now() + validForInMS + 60000; // Add extra minute
+                this.expiresAt = Date.now() + validForInMS;
 
                 this.#shouldPoll = true;
                 this.#checkErrors = 0;
@@ -172,10 +174,10 @@ class SMSActivate extends EventEmitter {
             this.#checkErrors++;
         }
 
-        if (this.expiresAt && Date.now() > this.expiresAt) {
-            this.#shouldPoll = false;
-            this.emit('expired', { orderId: this.orderId });
-        }
+        // if (this.expiresAt && Date.now() > this.expiresAt) {
+        //     this.#shouldPoll = false;
+        //     this.emit('expired', { orderId: this.orderId });
+        // }
 
         if (this.#shouldPoll) {
             setTimeout(this.#monitor.bind(this), this.#pollRate);

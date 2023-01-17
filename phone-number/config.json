@@ -1,9 +1,90 @@
 {
     "services": {
-        "Amazon": {
-            "service_name": "Amazon",
-            "sms_activate_id": "am",
-            "5sim_id": "amazon",
+        "VKontakte": {
+            "service_name": "VKontakte",
+            "sms_activate_id": "vk",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Whatsapp": {
+            "service_name": "Whatsapp",
+            "sms_activate_id": "wa",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Viber": {
+            "service_name": "Viber",
+            "sms_activate_id": "vi",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Telegram": {
+            "service_name": "Telegram",
+            "sms_activate_id": "tg",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "WeChat": {
+            "service_name": "WeChat",
+            "sms_activate_id": "wb",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Google": {
+            "service_name": "Google",
+            "sms_activate_id": "go",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "YouTube": {
+            "service_name": "YouTube",
+            "sms_activate_id": "go",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Gmail": {
+            "service_name": "Gmail",
+            "sms_activate_id": "go",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "facebook": {
+            "service_name": "facebook",
+            "sms_activate_id": "fb",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Twitter": {
+            "service_name": "Twitter",
+            "sms_activate_id": "tw",
+            "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
             "price_in_cents": 99,
             "country": 12,
@@ -15,22 +96,13 @@
             "5sim_id": "uber",
             "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": "iausydgf8ig89dfgas8d7fga8sdfg0as 7dgf890asdg f8ad0f8 as8dfasdf",
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
-        "Uber Eats": {
-            "service_name": "Uber Eats",
-            "sms_activate_id": "ub",
-            "5sim_id": "uber",
-            "provider_to_use": "5sim_id",
-            "price_in_cents": 99,
-            "country": "x93n987yn98asty89a s89 fasd9 8ftasd869ftasf6t 9astf 9astd faf0",
-            "number_valid_time_in_ms": 1200000
-        },
-        "Google": {
-            "service_name": "Google",
-            "sms_activate_id": "go",
-            "5sim_id": "google",
+        "Instagram": {
+            "service_name": "Instagram",
+            "sms_activate_id": "ig",
+            "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
             "price_in_cents": 99,
             "country": 12,
@@ -39,7 +111,331 @@
         "Microsoft": {
             "service_name": "Microsoft",
             "sms_activate_id": "mm",
-            "5sim_id": "microsoft",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Airbnb": {
+            "service_name": "Airbnb",
+            "sms_activate_id": "uk",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Line messenger": {
+            "service_name": "Line messenger",
+            "sms_activate_id": "me",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Yahoo": {
+            "service_name": "Yahoo",
+            "sms_activate_id": "mb",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Steam": {
+            "service_name": "Steam",
+            "sms_activate_id": "mt",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Tinder": {
+            "service_name": "Tinder",
+            "sms_activate_id": "oi",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "AOL": {
+            "service_name": "AOL",
+            "sms_activate_id": "pm",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "LinkedIN": {
+            "service_name": "LinkedIN",
+            "sms_activate_id": "tn",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Tencent QQ": {
+            "service_name": "Tencent QQ",
+            "sms_activate_id": "qq",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Netflix": {
+            "service_name": "Netflix",
+            "sms_activate_id": "nf",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Discord": {
+            "service_name": "Discord",
+            "sms_activate_id": "ds",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "TikTok": {
+            "service_name": "TikTok",
+            "sms_activate_id": "lf",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Zoho": {
+            "service_name": "Zoho",
+            "sms_activate_id": "zh",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Ticketmaster": {
+            "service_name": "Ticketmaster",
+            "sms_activate_id": "gp",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Amazon": {
+            "service_name": "Amazon",
+            "sms_activate_id": "am",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "ProtonMail": {
+            "service_name": "ProtonMail",
+            "sms_activate_id": "dp",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Snapchat": {
+            "service_name": "Snapchat",
+            "sms_activate_id": "fu",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Alipay": {
+            "service_name": "Alipay",
+            "sms_activate_id": "hw",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Alibaba": {
+            "service_name": "Alibaba",
+            "sms_activate_id": "hw",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Nike": {
+            "service_name": "Nike",
+            "sms_activate_id": "ew",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "eBay": {
+            "service_name": "eBay",
+            "sms_activate_id": "dh",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Grindr": {
+            "service_name": "Grindr",
+            "sms_activate_id": "yw",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "PayPal": {
+            "service_name": "PayPal",
+            "sms_activate_id": "ts",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Blizzard": {
+            "service_name": "Blizzard",
+            "sms_activate_id": "bz",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Craigslist": {
+            "service_name": "Craigslist",
+            "sms_activate_id": "wc",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "OfferUp": {
+            "service_name": "OfferUp",
+            "sms_activate_id": "zm",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Moneylion": {
+            "service_name": "Moneylion",
+            "sms_activate_id": "qo",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Apple": {
+            "service_name": "Apple",
+            "sms_activate_id": "wx",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Twitch": {
+            "service_name": "Twitch",
+            "sms_activate_id": "hb",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Wise": {
+            "service_name": "Wise",
+            "sms_activate_id": "bo",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "CourseHero": {
+            "service_name": "CourseHero",
+            "sms_activate_id": "yg",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Google Voice": {
+            "service_name": "Google Voice",
+            "sms_activate_id": "gf",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Lyft": {
+            "service_name": "Lyft",
+            "sms_activate_id": "tu",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Skype": {
+            "service_name": "Skype",
+            "sms_activate_id": "rc",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Bumble": {
+            "service_name": "Bumble",
+            "sms_activate_id": "mo",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "DoorDash": {
+            "service_name": "DoorDash",
+            "sms_activate_id": "ac",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Other (Unlisted)": {
+            "service_name": "Other (Unlisted)",
+            "sms_activate_id": "ot",
+            "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
             "price_in_cents": 99,
             "country": 12,

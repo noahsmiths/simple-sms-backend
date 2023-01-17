@@ -105,7 +105,7 @@
     },
     {
         "service_name": "Tencent QQ",
-        "service_icon": "icon-park:tencent-qq",
+        "service_icon": "icon-park-outline:tencent-qq",
         "service_price": 99
     },
     {
@@ -248,9 +248,10 @@
         "service_price": 99
     },
     {
-        "service_name": "Any other",
+        "service_name": "Other (Unlisted)",
         "service_icon": "zondicons:dial-pad",
         "service_price": 99,
-        "service_name_old": "Any other"
+        "service_name_old": "Any other",
+        "is_other": true
     }
 ]
