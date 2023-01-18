@@ -283,9 +283,23 @@ const monitorSms = (smsInstance, orderId) => {
 
             if (await orderCanBeRefunded(orderId)) {
                 let order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
-                await venmo.refundTransaction(order.venmoTransactionId, order.amount);
+                
                 await cancelledOrderCollection.insertOne(order);
                 await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
+                venmo.refundTransaction(order.venmoTransactionId, order.amount)
+                    .then(() => {
+                        if (orderId) {
+                            activeSMSMonitors.delete(orderId);
+                            smsInstance.stopMonitoring(true);
+                            io.to(orderId).emit('refunded');
+                        }
+                    })
+                    .catch((err) => {
+                        if (orderId) {
+                            smsInstance.startMonitoring();
+                            io.to(orderId).emit('refund-error');
+                        }
+                    });
 
                 // activeSMSMonitors.delete(orderId);
                 io.to(msg.orderId).emit('order-cancelled');
@@ -298,9 +312,6 @@ const monitorSms = (smsInstance, orderId) => {
         } catch (err) {
             io.to(orderId).emit('order-cancellation-error', { error: 'Error cancelling order.' });
         }
-
-        activeSMSMonitors.delete(orderId);
-        smsInstance.stopMonitoring(true);
     });
 
     smsInstance.on('new-message', async (msg) => {
