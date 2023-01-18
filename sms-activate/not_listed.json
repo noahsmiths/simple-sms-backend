@@ -98,5 +98,10 @@
         "service_name": "CELEBe",
         "service_icon": "mingcute:airbnb-line",
         "service_price": 99
+    },
+    {
+        "service_name": "Moneylion",
+        "service_icon": "game-icons:lion",
+        "service_price": 99
     }
 ]

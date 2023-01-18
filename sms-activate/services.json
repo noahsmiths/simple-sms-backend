@@ -202,11 +202,6 @@
         "service_price": 99
     },
     {
-        "service_name": "Moneylion",
-        "service_icon": "game-icons:lion",
-        "service_price": 99
-    },
-    {
         "service_name": "Apple",
         "service_icon": "ic:baseline-apple",
         "service_price": 99
