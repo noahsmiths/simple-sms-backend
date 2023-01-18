@@ -27,7 +27,7 @@ const activeSMSMonitors = new Map();
 
 const io = new Server({
     cors: {
-        origin: "http://localhost:3000",
+        origin: ["http://localhost:3000", "https://simple-sms.io"],
         methods: ["GET", "POST"]
     }
 });
