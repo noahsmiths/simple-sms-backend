@@ -48,7 +48,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('get-order', async (orderId) => {
-        if (!orderId || !isValidUUIDV4(orderId)) return;
+        if (!orderId || !isValidUUIDV4(orderId)) {
+            socket.emit('order-not-found');
+            return;
+        }
 
         let order;
         let isCancelled = false;
