@@ -64,7 +64,10 @@ io.on('connection', (socket) => {
             order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
         }
 
-        if (!order) return;
+        if (!order) {
+            socket.emit('order-not-found');
+            return;
+        }
 
         socket.join(orderId);
 
