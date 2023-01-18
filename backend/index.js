@@ -53,8 +53,6 @@ io.on('connection', (socket) => {
             return;
         }
 
-        //comment
-
         let order;
         let isCancelled = false;
 
