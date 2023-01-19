@@ -124,8 +124,6 @@ io.on('connection', (socket) => {
     })
 });
 
-//comment
-
 venmo.on('new-transaction', async (tx) => {
     // console.log(tx);
     let orderId;
