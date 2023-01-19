@@ -37,7 +37,7 @@ class VenmoAPI extends EventEmitter {
 
                 this.checkForNewTransactions();
             })
-            .catch(err => this.emit('error', err.toString()));
+            .catch(err => this.emit('error', err));
     }
 
     async checkForNewTransactions() {
@@ -76,7 +76,7 @@ class VenmoAPI extends EventEmitter {
             this.#mostRecentTransactionId = newestTransactionId;
             fs.writeFileSync('./newest_tx_id', this.#mostRecentTransactionId);
         } catch (err) {
-            this.emit('error', err.toString());
+            this.emit('error', err);
         }
 
         if (this.#shouldPoll) {

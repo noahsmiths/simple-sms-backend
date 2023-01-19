@@ -448,9 +448,9 @@ const collectionHasOrder = async (collection, orderId) => {
     return await collection.findOne({ orderId: orderId }) !== null;
 }
 
-// venmo.on('error', (err) => {
-//     console.log(err);
-// });
+venmo.on('error', (err) => {
+    console.error(err);
+});
 
 const loadActiveOrders = async () => {
     let allOrdersWaitingForNumber = await awaitingNumberCollection.find().toArray();
