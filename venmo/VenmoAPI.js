@@ -14,7 +14,7 @@ class VenmoAPI extends EventEmitter {
     #mostRecentTransactionId = fs.existsSync('./newest_tx_id') ? fs.readFileSync('./newest_tx_id').toString() : "";
     #nextPageURL = "";
 
-    constructor(token, accountId, shouldPoll = true, pollRate = 5000) {
+    constructor(token, accountId, shouldPoll = true, pollRate = 2500) {
         super();
 
         this.#token = token;
