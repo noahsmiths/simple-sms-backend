@@ -450,7 +450,7 @@ const collectionHasOrder = async (collection, orderId) => {
 
 venmo.on('error', (err) => {
     // console.error(err);
-    console.log("venmo error");
+    console.error("venmo error");
 });
 
 const loadActiveOrders = async () => {
