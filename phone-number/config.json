@@ -129,10 +129,10 @@
         "Airbnb": {
             "service_name": "Airbnb",
             "sms_activate_id": "uk",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "airbnb",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Line messenger": {
@@ -183,10 +183,10 @@
         "LinkedIN": {
             "service_name": "LinkedIN",
             "sms_activate_id": "tn",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "linkedin",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Tencent QQ": {
@@ -201,10 +201,10 @@
         "Netflix": {
             "service_name": "Netflix",
             "sms_activate_id": "nf",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "netflix",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Discord": {
@@ -219,10 +219,10 @@
         "TikTok": {
             "service_name": "TikTok",
             "sms_activate_id": "lf",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "tiktok",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Zoho": {
@@ -273,19 +273,19 @@
         "Alipay": {
             "service_name": "Alipay",
             "sms_activate_id": "hw",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "alibaba",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Alibaba": {
             "service_name": "Alibaba",
             "sms_activate_id": "hw",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "alibaba",
+            "provider_to_use": "5sim_id",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "Nike": {
