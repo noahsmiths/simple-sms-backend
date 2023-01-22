@@ -40,8 +40,10 @@ class SMSActivate extends EventEmitter {
         });
     }
 
-    getNumber(service, country = 12, validForInMS = 1200000) {
+    getNumber(config) {
         return new Promise(async (resolve, reject) => {
+            const { service, country, validForInMS } = config;
+
             let success = false;
             let parsedResponse;
     

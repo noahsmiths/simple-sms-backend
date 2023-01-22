@@ -27,15 +27,22 @@ class PhoneAPI extends EventEmitter {
             let provider = serviceDetails?.['provider_to_use'];
             let serviceId = serviceDetails?.[provider];
             let country = serviceDetails?.['country'];
-            let validTime = serviceDetails?.['number_valid_time_in_ms'];
+            // let validTime = serviceDetails?.['number_valid_time_in_ms'];
+
             let api;
+            let providerConfig = {
+                service: serviceId,
+                country: country,
+            };
 
             switch (provider) {
                 case "sms_activate_id":
                     api = new SMSActivate(this.#SMSActivateAPIKey, orderId);
+                    providerConfig.validForInMS = serviceDetails?.['number_valid_time_in_ms'];
                 break;
                 case "5sim_id":
                     api = new FiveSim(this.#FiveSimAPIKey, orderId);
+                    providerConfig.operator = serviceDetails?.['5sim_operator'] || 'virtual8';
                 break;
                 default:
                     reject("Invalid service.");
@@ -43,7 +50,7 @@ class PhoneAPI extends EventEmitter {
                 break;
             }
 
-            api.getNumber(serviceId, country, validTime)
+            api.getNumber(providerConfig)
                 .then((instance) => {
                     // this.#activeNumbers.add(instance);
 

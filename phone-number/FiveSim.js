@@ -38,8 +38,10 @@ class FiveSim extends EventEmitter {
         this.messages = [];
     }
 
-    getNumber(service, country = 1, validForInMS = 1200000, operator = 'virtual8') {
+    getNumber(config) {
         return new Promise(async (resolve, reject) => {
+            const { service, country, operator } = config;
+            
             let success = false;
             let numberResponse;
     
