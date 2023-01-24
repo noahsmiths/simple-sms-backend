@@ -171,10 +171,11 @@
         "Tinder": {
             "service_name": "Tinder",
             "sms_activate_id": "oi",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "tinder",
+            "provider_to_use": "5sim_id",
+            "5sim_operator": "virtual32",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "AOL": {
