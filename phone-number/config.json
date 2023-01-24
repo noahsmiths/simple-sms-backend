@@ -414,7 +414,7 @@
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": "usa",
+            "country": 12,
             "number_valid_time_in_ms": 1200000
         },
         "Lyft": {
