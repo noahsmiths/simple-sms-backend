@@ -30,10 +30,11 @@
         "Telegram": {
             "service_name": "Telegram",
             "sms_activate_id": "tg",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "telegram",
+            "provider_to_use": "5sim_id",
+            "5sim_operator": "virtual28",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "WeChat": {
