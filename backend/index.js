@@ -267,7 +267,7 @@ const getNumberForOrder = async (orderId, service) => {
     // Send webhook to discord 
     let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
 
-    hook.success(`Order Confirmed ${orderId}`, `${updatedNumber}`, `${service}`);
+    hook.success(`Order Confirmed ${orderId}`, `📱 ${updatedNumber}`, `🧪 ${service}`);
 
 
     await awaitingFirstTextCollection.insertOne(order);
