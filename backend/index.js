@@ -6,10 +6,12 @@ const { v4: uuidv4 } = require('uuid');
 const isValidUUIDV4 = require('is-valid-uuid-v4').isValidUUIDV4;
 const PhoneAPI = require('../phone-number/PhoneAPI');
 const { services } = require('../phone-number/config.json');
+const { Webhook } = require('discord-webhook-node');
 
 const venmo = new VenmoAPI(process.env.VENMO_BUSINESS_TOKEN, process.env.VENMO_BUSINESS_ID);
 const phoneAPI = new PhoneAPI(process.env.SMS_ACTIVATE_KEY, process.env.FIVE_SIM_KEY);
 const client = new MongoClient(process.env.MONGO_URI);
+const hook = new Webhook("https://discord.com/api/webhooks/1077992935326482574/mF40YRlGilD2mKDzHZ9c_QqyvPoG88rUkpl5jrgru-t63mC7iVjwNQH-gW2I0tKE9Bm5");
 
 const orderDB = client.db('orders');
 const awaitingPaymentCollection = orderDB.collection('awaitingPayment');
@@ -38,7 +40,7 @@ io.on('connection', (socket) => {
             const orderId = uuidv4();
 
             console.log(orderId);
-    
+
             await awaitingPaymentCollection.insertOne({ orderId: orderId, transactionCreatedAt: Date.now() });
             socket.join(orderId);
             socket.emit('order-created', { orderId });
@@ -105,11 +107,12 @@ io.on('connection', (socket) => {
         if (await orderCanBeRefunded(orderId)) {
             if (activeSMSMonitors.has(orderId)) {
                 let smsInstance = await activeSMSMonitors.get(orderId);
-
                 await smsInstance.cancel();
+
+                hook.error("Order Cancelled", `Order ID`, `${orderId}`)
             }
             // else if (collectionHasOrder(awaitingFirstTextCollection, orderId)) {
-                
+
             // }
             // else if (collectionHasOrder(awaitingNumberCollection, orderId)) {
         } else {
@@ -183,6 +186,8 @@ venmo.on('new-transaction', async (tx) => {
         await awaitingNumberCollection.insertOne(order);
         await awaitingPaymentCollection.deleteOne({ orderId: orderId });
 
+
+
         io.to(orderId).emit('order-confirmed', { orderId: orderId });
 
         await getNumberForOrder(orderId, service);
@@ -220,7 +225,7 @@ const getNumberForOrder = async (orderId, service) => {
 
     try {
         let numberRequest = await phoneAPI.getNumberByService(orderId, service);
-        
+
         smsInstance = numberRequest.smsInstance;
         number = numberRequest.number;
         provider = numberRequest.provider;
@@ -259,6 +264,13 @@ const getNumberForOrder = async (orderId, service) => {
     order.expiresAt = smsInstance.expiresAt;
     order.messages = [];
 
+    // Send webhook to discord 
+    let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) 
+    ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
+
+    hook.success('Order Confirmed', `${orderId}`, `${updatedNumber}\n${service}`);
+
+
     await awaitingFirstTextCollection.insertOne(order);
     await awaitingNumberCollection.deleteOne({ orderId: orderId });
 
@@ -267,7 +279,7 @@ const getNumberForOrder = async (orderId, service) => {
     io.to(orderId).emit('order-phone-number', number);
 
     venmo.commentOnTransaction(order.venmoTransactionId, `Your order is now active at: https://simple-sms.io/order/${orderId}`)
-        .then(() => {})
+        .then(() => { })
         .catch(console.error);
 }
 
@@ -289,7 +301,7 @@ const monitorSms = (smsInstance, orderId) => {
 
             if (await orderCanBeRefunded(orderId)) {
                 let order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
-                
+
                 await cancelledOrderCollection.insertOne(order);
                 await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
                 venmo.refundTransaction(order.venmoTransactionId, order.amount)
@@ -346,7 +358,7 @@ const monitorSms = (smsInstance, orderId) => {
             order.messages.unshift(newMessage);
 
             await activeOrderCollection.replaceOne({ orderId: orderId }, order, { upsert: true });
-            
+
             if (isFirstText) {
                 await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
             }
@@ -376,8 +388,8 @@ const monitorSms = (smsInstance, orderId) => {
                         }
                     });
 
-                    await cancelledOrderCollection.insertOne(order);
-                    await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
+                await cancelledOrderCollection.insertOne(order);
+                await awaitingFirstTextCollection.deleteOne({ orderId: orderId });
             } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
                 let order = await activeOrderCollection.findOne({ orderId: orderId });
 
@@ -428,7 +440,7 @@ const orderIdIsValid = async (id) => {
         // console.log(isAwaitingNumber);
         // console.log(isAwaitingFirstText);
         // console.log(isValid && !isCompleted && !isCancelled && !isActive && !isAwaitingNumber && !isAwaitingFirstText);
-        
+
         return isValid && !isCompleted && !isCancelled && !isActive && !isAwaitingNumber && !isAwaitingFirstText;
     } catch (err) {
         console.log(err);
