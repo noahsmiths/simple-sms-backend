@@ -271,7 +271,7 @@ const getNumberForOrder = async (orderId, service) => {
     let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
     let embed = new MessageBuilder()
         .setTitle('Order Confirmed')
-        .setUrl(`https://simple-sms.io/order/${orderId}`)
+        .setURL(`https://simple-sms.io/order/${orderId}`)
         .addField('Order ID', `${orderId}`, true)
         .addField('Service', `${service}`, true)
         .addField('Number', `${updatedNumber}`, true)
