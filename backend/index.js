@@ -6,12 +6,15 @@ const { v4: uuidv4 } = require('uuid');
 const isValidUUIDV4 = require('is-valid-uuid-v4').isValidUUIDV4;
 const PhoneAPI = require('../phone-number/PhoneAPI');
 const { services } = require('../phone-number/config.json');
-const { Webhook } = require('discord-webhook-node');
+const { Webhook, MessageBuilder } = require('discord-webhook-node');
 
 const venmo = new VenmoAPI(process.env.VENMO_BUSINESS_TOKEN, process.env.VENMO_BUSINESS_ID);
 const phoneAPI = new PhoneAPI(process.env.SMS_ACTIVATE_KEY, process.env.FIVE_SIM_KEY);
 const client = new MongoClient(process.env.MONGO_URI);
-const hook = new Webhook("https://discord.com/api/webhooks/1077992935326482574/mF40YRlGilD2mKDzHZ9c_QqyvPoG88rUkpl5jrgru-t63mC7iVjwNQH-gW2I0tKE9Bm5");
+const hook = new Webhook({
+    url: "https://discord.com/api/webhooks/1077992935326482574/mF40YRlGilD2mKDzHZ9c_QqyvPoG88rUkpl5jrgru-t63mC7iVjwNQH-gW2I0tKE9Bm5",
+    retryOnLimit: false
+});
 
 const orderDB = client.db('orders');
 const awaitingPaymentCollection = orderDB.collection('awaitingPayment');
@@ -266,8 +269,18 @@ const getNumberForOrder = async (orderId, service) => {
 
     // Send webhook to discord 
     let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
+    let embed = new MessageBuilder()
+        .setTitle('Order Confirmed')
+        .setUrl(`https://simple-sms.io/order/${orderId}`)
+        .addField('Order ID', `${orderId}`, true)
+        .addField('Service', `${service}`, true)
+        .addField('Number', `${updatedNumber}`, true)
+        .setColor('#fbbf24')
+        .setTimestamp();
 
-    hook.success(`Order Confirmed ${orderId}`, `Number: ${updatedNumber}`, `Service: ${service}`);
+
+
+    hook.send(embed);
 
 
     await awaitingFirstTextCollection.insertOne(order);
