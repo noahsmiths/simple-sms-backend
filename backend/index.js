@@ -135,6 +135,8 @@ venmo.on('new-transaction', async (tx) => {
     let orderId;
 
     try {
+        if (await venmoTransactionIdExists(tx.id)) return;
+
         let parsedTx = tx.memo.split(':');
 
         if (parsedTx.length < 3) {
@@ -470,6 +472,25 @@ const orderCanBeRefunded = async (orderId) => {
 
 const collectionHasOrder = async (collection, orderId) => {
     return await collection.findOne({ orderId: orderId }) !== null;
+}
+
+const collectionHasVenmoTransactionId = async (collection, txId) => {
+    return await collection.findOne({ venmoTransactionId: txId }) !== null;
+}
+
+const venmoTransactionIdExists = async (transactionId) => {
+    try {
+        let existsInCompleted = await collectionHasVenmoTransactionId(completedOrderCollection, transactionId);
+        let existsInCancelled = await collectionHasVenmoTransactionId(cancelledOrderCollection, transactionId);
+        let existsInActive = await collectionHasVenmoTransactionId(activeOrderCollection, transactionId);
+        let existsInAwaitingNumber = await collectionHasVenmoTransactionId(awaitingNumberCollection, transactionId);
+        let existsInAwaitingFirstText = await collectionHasVenmoTransactionId(awaitingFirstTextCollection, transactionId);
+    
+        return existsInCompleted || existsInCancelled || existsInActive || existsInAwaitingNumber || existsInAwaitingFirstText;
+    } catch (err) {
+        console.error(err);
+        return true;
+    }
 }
 
 venmo.on('error', (err) => {

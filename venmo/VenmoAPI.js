@@ -43,7 +43,7 @@ class VenmoAPI extends EventEmitter {
     async checkForNewTransactions() {
         try {
             let transactions = await this.getTransactions();
-            let i = 0;
+            // let i = 0;
 
             let newestTransactionId = transactions[0]?.ledger_id || "";
 
@@ -52,7 +52,38 @@ class VenmoAPI extends EventEmitter {
             // console.log(this.#mostRecentTransactionId);
             // console.log(transactions[i] && transactions[i].ledger_id !== this.#mostRecentTransactionId);
 
-            while (transactions[i] && transactions[i].ledger_id !== this.#mostRecentTransactionId) {
+            /**
+             * TODO: mostRecentTransactionId will be a refund if a refund is pending, making the search for new transactions halt prematurely
+             * 
+             * Example TX Object:
+             * {
+                datetime_modified: '2023-02-26T03:46:09Z',
+                peer: {
+                    type: 'user',
+                    id: '1335932674375680335',
+                    image_url: 'https://s3.amazonaws.com/venmo/no-image.gif',
+                    display_name: 'Kartik G'
+                },
+                refund_type: 'FULL',
+                is_transaction_supported_for_dispute_intake: false,
+                status: 'pending',
+                running_balance_in_cents: null,
+                movement_type: 'debit',
+                transaction_type: 'refund.in_app_refund',
+                funding_method_type: 'balance',
+                amount_in_cents: 99,
+                ledger_id: '3746479586046795247',
+                audience: 'private',
+                datetime_estimated_arrival: '2023-03-02',
+                datetime_created: '2023-02-26T03:46:09Z'
+                }
+             * 
+             * Instead, mostRecentTransactionId should be the most recent NON-REFUNDED transaction ID
+             * 
+             * Old while loop conditions are commented out, temporary fix of just searching through all 50 recent transactions has been implemented instead
+             */
+            // while (transactions[i] && transactions[i].ledger_id !== this.#mostRecentTransactionId) {
+            for (let i = 0; i < transactions.length; i++) {
                 let tx = transactions[i]; // Guaranteed to be new by the conditions of the while loop
 
                 // console.log(tx);
@@ -67,10 +98,10 @@ class VenmoAPI extends EventEmitter {
                     });
                 }
                 
-                if (++i >= transactions.length) {
-                    transactions = await this.getTransactions(true);
-                    i = 0;
-                }
+                // if (++i >= transactions.length) {
+                //     transactions = await this.getTransactions(true);
+                //     i = 0;
+                // }
             }
 
             this.#mostRecentTransactionId = newestTransactionId;
