@@ -50,30 +50,30 @@
             "service_name": "Google",
             "sms_activate_id": "go",
             "5sim_id": "google",
-            "provider_to_use": "5sim_id",
+            "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": "usa",
+            "country": 12,
             "number_valid_time_in_ms": 1200000
         },
         "YouTube": {
             "service_name": "YouTube",
             "sms_activate_id": "go",
             "5sim_id": "google",
-            "provider_to_use": "5sim_id",
+            "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": "usa",
+            "country": 12,
             "number_valid_time_in_ms": 1200000
         },
         "Gmail": {
             "service_name": "Gmail",
             "sms_activate_id": "go",
             "5sim_id": "google",
-            "provider_to_use": "5sim_id",
+            "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": "usa",
+            "country": 12,
             "number_valid_time_in_ms": 1200000
         },
         "facebook": {
@@ -137,10 +137,10 @@
             "service_name": "Airbnb",
             "sms_activate_id": "uk",
             "5sim_id": "airbnb",
-            "provider_to_use": "5sim_id",
+            "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": "usa",
+            "country": 12,
             "number_valid_time_in_ms": 1200000
         },
         "Line messenger": {
@@ -221,10 +221,11 @@
         "Discord": {
             "service_name": "Discord",
             "sms_activate_id": "ds",
-            "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "5sim_id": "discord",
+            "provider_to_use": "5sim_id",
+            "5sim_operator": "virtual32",
             "price_in_cents": 99,
-            "country": 12,
+            "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
         "TikTok": {
@@ -450,6 +451,15 @@
         "DoorDash": {
             "service_name": "DoorDash",
             "sms_activate_id": "ac",
+            "5sim_id": "N/A",
+            "provider_to_use": "sms_activate_id",
+            "price_in_cents": 99,
+            "country": 12,
+            "number_valid_time_in_ms": 1200000
+        },
+        "Venmo": {
+            "service_name": "Venmo",
+            "sms_activate_id": "yy",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
             "price_in_cents": 99,
