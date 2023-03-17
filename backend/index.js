@@ -9,7 +9,12 @@ const { services } = require('../phone-number/config.json');
 const { Webhook, MessageBuilder } = require('discord-webhook-node');
 
 const venmo = new VenmoAPI(process.env.VENMO_BUSINESS_TOKEN, process.env.VENMO_BUSINESS_ID);
-const phoneAPI = new PhoneAPI(process.env.SMS_ACTIVATE_KEY, process.env.FIVE_SIM_KEY);
+const phoneAPI = new PhoneAPI({
+    smsActivateKey: process.env.SMS_ACTIVATE_KEY,
+    fiveSimKey: process.env.FIVE_SIM_KEY,
+    unitedSMSUsername: process.env.UNITED_SMS_USERNAME,
+    unitedSMSPassword: process.env.UNITED_SMS_PASSWORD,
+});
 const client = new MongoClient(process.env.MONGO_URI);
 const hook = new Webhook({
     url: "https://discord.com/api/webhooks/1077992935326482574/mF40YRlGilD2mKDzHZ9c_QqyvPoG88rUkpl5jrgru-t63mC7iVjwNQH-gW2I0tKE9Bm5",

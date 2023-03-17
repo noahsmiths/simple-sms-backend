@@ -3,6 +3,7 @@ const { EventEmitter } = require('events');
 
 const SMSActivate = require('./SMSActivate');
 const FiveSim = require('./FiveSim');
+const UnitedSMS = require('./UnitedSMS');
 
 const config = require('./config.json');
 const services = config.services;
@@ -10,13 +11,17 @@ const services = config.services;
 class PhoneAPI extends EventEmitter {
     #SMSActivateAPIKey
     #FiveSimAPIKey
+    #UnitedSMSUsername
+    #UnitedSMSPassword
     #activeNumbers
 
-    constructor(smsActivateKey, fiveSimKey) {
+    constructor(keys) {
         super();
 
-        this.#SMSActivateAPIKey = smsActivateKey;
-        this.#FiveSimAPIKey = fiveSimKey;
+        this.#SMSActivateAPIKey = keys.smsActivateKey;
+        this.#FiveSimAPIKey = keys.fiveSimKey;
+        this.#UnitedSMSUsername = keys.unitedSMSUsername;
+        this.#UnitedSMSPassword = keys.unitedSMSPassword;
 
         this.#activeNumbers = new Set();
     }
@@ -43,6 +48,9 @@ class PhoneAPI extends EventEmitter {
                 case "5sim_id":
                     api = new FiveSim(this.#FiveSimAPIKey, orderId);
                     providerConfig.operator = serviceDetails?.['5sim_operator'] || 'virtual8';
+                break;
+                case "united_sms":
+                    api = new UnitedSMS({ username: this.#UnitedSMSUsername, password: this.#UnitedSMSPassword }, orderId);
                 break;
                 default:
                     reject("Invalid service.");
@@ -84,6 +92,9 @@ class PhoneAPI extends EventEmitter {
                 break;
                 case "5sim_id":
                     api = new FiveSim(this.#FiveSimAPIKey, orderId);
+                break;
+                case "united_sms":
+                    api = new UnitedSMS({ username: this.#UnitedSMSUsername, password: this.#UnitedSMSPassword }, orderId);
                 break;
                 default:
                     reject("Invalid service.");
