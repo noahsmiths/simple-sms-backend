@@ -21,6 +21,7 @@ class UnitedSMS extends EventEmitter {
     number
     expiresAt
     messages
+    service
 
     constructor(_key, _orderId, _pollRate = 5000) {
         super();
@@ -58,7 +59,8 @@ class UnitedSMS extends EventEmitter {
 
                     if (numberRequest.status !== 200) continue;
 
-                    if (numberRequest.data?.status !== 'ok' && numberRequest.data?.message?.[0].mdn) {
+                    if (numberRequest.data?.status === 'ok' && numberRequest.data?.message?.[0]?.mdn) {
+                        this.service = service;
                         numberResponse = numberRequest.data;
                         success = true;
                         break;
@@ -109,40 +111,113 @@ class UnitedSMS extends EventEmitter {
         try {
             let check = await this.#client({
                 method: 'GET',
-                url: `/check/${this.providerId}`
+                params: {
+                    cmd: 'request_status',
+                    id: this.providerId
+                }
             });
 
-            if (check.status === 404) {
+            if (check.status !== 200 || check.data.status === 'error' || !Array.isArray(check.data.message)) {
                 this.#shouldPoll = false;
-                this.emit('invalid', { orderId: this.orderId });
-                return;
-            } else if (check.status !== 200) {
+                // this.emit('invalid', { orderId: this.orderId });
+                this.emit('cancelled', { orderId: this.orderId });
                 throw new Error();
             }
 
-            let checkResponse = check.data;
+            let checkResponse = check.data.message[0];
 
-            if (checkResponse.status === 'CANCELED' || checkResponse.status === 'BANNED' || checkResponse.status === 'TIMEOUT') { // Order is cancelled and refunded
+            if (checkResponse.status === 'Rejected' || checkResponse.status === 'Timed Out') { // Order is cancelled and refunded
                 this.#shouldPoll = false;
                 this.emit('cancelled', { orderId: this.orderId });
-            } else if (checkResponse.status === 'RECEIVED') { // Text has come through
-                for (let i = this.messages.length; i < checkResponse.sms.length; i++) {
-                    let currentMessage = checkResponse.sms[i];
+            } else if (checkResponse.status === 'Completed') {
+                if (this.expiresAt > Date.now()) {
+                    this.#shouldPoll = false;
+                    this.emit('cancelled', { orderId: this.orderId });
+                } else {
+                    // Get messages and send new message if message array is longer
+                    // Make sure that when issuing new request to reuse the phone number that the returned price is 0, otherwise refund and cancel the transaction
+                    // this.emit('new-message', new-id-returned-from-reused-request);
 
-                    let parsedMessage = {
-                        orderId: this.orderId,
-                        code: currentMessage.code,
-                        fullText: currentMessage.text
+                    // 
+                    let { data: { message: sms }} = await this.#client({
+                        method: 'GET',
+                        params: {
+                            cmd: 'read_sms',
+                            mdn: this.number,
+                        }
+                    });
+
+                    sms = sms.filter((msg) => {
+                        return msg.timestamp < this.expiresAt;
+                    });
+
+                    for (let i = 0; i < (sms.length - this.messages.length); i++) {
+                        let currentMessage = sms[i];
+
+                        try {
+                            let { data: {status, message}} = await this.#client({
+                                method: 'GET',
+                                params: {
+                                    cmd: 'request',
+                                    service: this.service,
+                                    mdn: this.number
+                                }
+                            });
+
+                            if (status === 'ok' && message.length > 0) {
+                                if (+message.price == 0) {
+                                    this.providerId = message[0].id;
+                                } else {
+                                    this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
+                                        method: 'GET',
+                                        params: {
+                                            cmd: 'reject',
+                                            id: message[0].id
+                                        }
+                                    });
+
+                                    this.#shouldPoll = false;
+                                    this.emit('cancelled', { orderId: this.orderId });
+                                }
+                            } else {
+                                this.#shouldPoll = false;
+                                this.emit('cancelled', { orderId: this.orderId });
+                            }
+                        } catch (err) {
+                            this.#shouldPoll = false;
+                            this.emit('cancelled', { orderId: this.orderId });
+                        }
+
+                        let parsedMessage = {
+                            orderId: this.orderId,
+                            code: currentMessage.pin,
+                            fullText: currentMessage.reply,
+                            providerId: this.providerId
+                        };
+
+                        this.messages.unshift(parsedMessage);
+                        this.emit('new-message', parsedMessage);
                     }
-
-                    this.messages.unshift(parsedMessage);
-
-                    this.emit('new-message', parsedMessage);
                 }
-            } else if (checkResponse.status === 'FINISHED') {
-                this.#shouldPoll = false;
-                this.emit('cancelled', { orderId: this.orderId });
             }
+            // } else if (checkResponse.status === 'Reserved') { // Text has come through
+            //     // for (let i = this.messages.length; i < checkResponse.sms.length; i++) {
+            //     //     let currentMessage = checkResponse.sms[i];
+
+            //     //     let parsedMessage = {
+            //     //         orderId: this.orderId,
+            //     //         code: currentMessage.code,
+            //     //         fullText: currentMessage.text
+            //     //     }
+
+            //     //     this.messages.unshift(parsedMessage);
+
+            //     //     this.emit('new-message', parsedMessage);
+            //     // }
+            // } else if (checkResponse.status === 'Completed') {
+            //     this.#shouldPoll = false;
+            //     this.emit('cancelled', { orderId: this.orderId });
+            // }
             
             this.#checkErrors = 0;
         } catch (err) {

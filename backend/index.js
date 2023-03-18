@@ -367,9 +367,12 @@ const monitorSms = (smsInstance, orderId) => {
                 if (order.messages[0].code === code && order.messages[0].fullText === fullText) return;
             }
 
+            order.providerId = msg.providerId || order.providerId; // Only update providerId if a new one is provided in the msg object
+
             let newMessage = {
                 code: code,
-                fullText: fullText
+                fullText: fullText,
+                providerId: order.providerId
             };
 
             io.to(orderId).emit('new-message', newMessage);
