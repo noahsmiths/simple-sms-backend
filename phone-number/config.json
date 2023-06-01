@@ -53,7 +53,7 @@
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": 12,
+            "country": 187,
             "number_valid_time_in_ms": 1200000
         },
         "YouTube": {
@@ -63,7 +63,7 @@
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": 12,
+            "country": 187,
             "number_valid_time_in_ms": 1200000
         },
         "Gmail": {
@@ -73,7 +73,7 @@
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
-            "country": 12,
+            "country": 187,
             "number_valid_time_in_ms": 1200000
         },
         "facebook": {
