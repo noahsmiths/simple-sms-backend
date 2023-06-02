@@ -7,6 +7,8 @@ axios.defaults.headers.common['device-id'] = "11111111-1111-1111-1111-1111111111
 
 const main = async () => {
     try {
+        console.log("Logging in...");
+
         let userLogin = await axios({
             method: 'POST',
             url: 'https://api.venmo.com/v1/oauth/access_token',
@@ -46,7 +48,7 @@ const main = async () => {
         fs.writeFileSync("./.venmo_business_account_id", identities.data.data.identities[1].external_id);
         fs.writeFileSync("./.venmo_business_account_token", businessTokenGrant.data.access_token);
     } catch (e) {
-        console.error(e);
+        console.error(e.response.data);
     }
 }
 
