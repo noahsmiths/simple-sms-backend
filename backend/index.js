@@ -63,6 +63,12 @@ io.on('connection', (socket) => {
             return;
         }
 
+        if (await collectionHasOrder(awaitingNumberCollection, orderId)) {
+            socket.join(orderId);
+            socket.emit('order-confirmed');
+            return;
+        }
+
         let order;
         let isCancelled = false;
 
