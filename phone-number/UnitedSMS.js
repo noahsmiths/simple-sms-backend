@@ -26,8 +26,8 @@ class UnitedSMS extends EventEmitter {
     constructor(_key, _orderId, _pollRate = 5000) {
         super();
 
-        this.#APIUsername = _key.UnitedSMSUsername;
-        this.#APIPassword = _key.UnitedSMSPassword;
+        this.#APIUsername = _key.username;
+        this.#APIPassword = _key.password;
         this.orderId = _orderId;
         this.#pollRate = _pollRate;
 
@@ -42,47 +42,56 @@ class UnitedSMS extends EventEmitter {
 
     getNumber(config) {
         return new Promise(async (resolve, reject) => {
-            const { service } = config;
+            try {
+                const { service } = config;
             
-            let success = false;
-            let numberResponse;
+                let success = false;
+                let numberResponse;
+        
+                for (let i = 0; i < MAX_GET_NUMBER_FAILS; i++) {
+                    try {
+                        let numberRequest = await this.#client({
+                            method: 'GET',
+                            params: {
+                                cmd: 'request',
+                                service: service,
+                            }
+                        });
     
-            for (let i = 0; i < MAX_GET_NUMBER_FAILS; i++) {
-                try {
-                    let numberRequest = await this.#client({
-                        method: 'GET',
-                        params: {
-                            cmd: 'request',
-                            service: service
+                        if (numberRequest.status !== 200) continue;
+    
+                        if (numberRequest.data?.status === 'ok' && numberRequest.data?.message?.[0]?.mdn) {
+                            // this.service = service;
+                            numberResponse = numberRequest.data;
+                            success = true;
+                            break;
                         }
-                    });
-
-                    if (numberRequest.status !== 200) continue;
-
-                    if (numberRequest.data?.status === 'ok' && numberRequest.data?.message?.[0]?.mdn) {
-                        this.service = service;
-                        numberResponse = numberRequest.data;
-                        success = true;
-                        break;
+    
+                        if (numberRequest.data?.status === 'error') {
+                            reject(numberRequest.data);
+                            return;
+                        }
+                    } catch (e) {
+                        console.log(e);
                     }
-                } catch (e) {
-                    console.log(e);
                 }
-            }
-
-            if (success) {
-                this.providerId = numberResponse.messages[0].id;
-                this.number = numberResponse.messages[0].mdn; // Substring used to remove the + at the beginning
-                // this.expiresAt = Date.now() + validForInMS + 60000; // Add extra minute
-                this.expiresAt = Date.now() + (numberResponse.messages[0].till_expiration * 1000);
-
-                this.#shouldPoll = true;
-                this.#checkErrors = 0;
-                this.#monitor();
-                // let smsInstance = new SMSActivateInstance(this.#APIKey, parsedResponse[1], parsedResponse[2]);
-                resolve(this);
-            } else {
-                reject();
+    
+                if (success) {
+                    this.providerId = numberResponse.message[0].id;
+                    this.number = numberResponse.message[0].mdn; // Substring used to remove the + at the beginning
+                    // this.expiresAt = Date.now() + validForInMS + 60000; // Add extra minute
+                    this.expiresAt = Date.now() + (numberResponse.message[0].till_expiration * 1000);
+    
+                    this.#shouldPoll = true;
+                    this.#checkErrors = 0;
+                    this.#monitor();
+                    // let smsInstance = new SMSActivateInstance(this.#APIKey, parsedResponse[1], parsedResponse[2]);
+                    resolve(this);
+                } else {
+                    reject("Number insuccessfully reserved from UnitedSMS");
+                }
+            } catch (err) {
+                reject(err);
             }
         });
     }
@@ -117,88 +126,122 @@ class UnitedSMS extends EventEmitter {
                 }
             });
 
-            if (check.status !== 200 || check.data.status === 'error' || !Array.isArray(check.data.message)) {
-                this.#shouldPoll = false;
-                // this.emit('invalid', { orderId: this.orderId });
-                this.emit('cancelled', { orderId: this.orderId });
-                throw new Error();
+            if (check.status !== 200 || check.data.status !== 'ok' || check.data.message === undefined) {
+                this.#checkErrors++;
+                
+                if (this.#checkErrors > MAX_CHECK_STATUS_FAILS) {
+                    this.#shouldPoll = false;
+                    // this.emit('invalid', { orderId: this.orderId });
+                    this.emit('cancelled', { orderId: this.orderId });
+                    // throw new Error();
+                }
             }
 
-            let checkResponse = check.data.message[0];
+            if (this.expiresAt < Date.now()) {
+                await this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
+                    method: 'GET',
+                    params: {
+                        cmd: 'reject',
+                        id: this.providerId
+                    }
+                });
+            }
+
+            let checkResponse = check.data.message;
 
             if (checkResponse.status === 'Rejected' || checkResponse.status === 'Timed Out') { // Order is cancelled and refunded
                 this.#shouldPoll = false;
+                this.#checkErrors = 0;
+
                 this.emit('cancelled', { orderId: this.orderId });
             } else if (checkResponse.status === 'Completed') {
-                if (this.expiresAt > Date.now()) {
-                    this.#shouldPoll = false;
-                    this.emit('cancelled', { orderId: this.orderId });
-                } else {
-                    // Get messages and send new message if message array is longer
-                    // Make sure that when issuing new request to reuse the phone number that the returned price is 0, otherwise refund and cancel the transaction
-                    // this.emit('new-message', new-id-returned-from-reused-request);
+                this.#checkErrors = 0;
 
-                    // 
-                    let { data: { message: sms }} = await this.#client({
+                // Get messages and send new message if message array is longer
+                // Make sure that when issuing new request to reuse the phone number that the returned price is 0, otherwise refund and cancel the transaction
+                // this.emit('new-message', new-id-returned-from-reused-request);
+
+                // 
+                let { data: { message: sms }} = await this.#client({
+                    method: 'GET',
+                    params: {
+                        cmd: 'read_sms',
+                        // mdn: this.number,
+                        id: this.providerId
+                    }
+                });
+
+                let parsedMessage = {
+                    orderId: this.orderId,
+                    code: sms[0].pin,
+                    fullText: sms[0].reply,
+                };
+
+                // sms = sms.filter((msg) => {
+                //     return msg.timestamp < this.expiresAt;
+                // });
+
+                try {
+                    let { data: {status, message}} = await this.#client({
                         method: 'GET',
                         params: {
-                            cmd: 'read_sms',
-                            mdn: this.number,
+                            cmd: 'request',
+                            service: sms[0].service,
+                            mdn: this.number
                         }
                     });
 
-                    sms = sms.filter((msg) => {
-                        return msg.timestamp < this.expiresAt;
-                    });
+                    if (status === 'ok' && message.length > 0) {
+                        if (+message[0].price == 0) {
+                            this.providerId = message[0].id;
 
-                    for (let i = 0; i < (sms.length - this.messages.length); i++) {
-                        let currentMessage = sms[i];
-
-                        try {
-                            let { data: {status, message}} = await this.#client({
+                            parsedMessage.providerId = this.providerId;
+                            this.emit('new-message', parsedMessage);
+                        } else {
+                            this.emit('new-message', parsedMessage);
+                            
+                            await this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
                                 method: 'GET',
                                 params: {
-                                    cmd: 'request',
-                                    service: this.service,
-                                    mdn: this.number
+                                    cmd: 'reject',
+                                    id: message[0].id
                                 }
                             });
 
-                            if (status === 'ok' && message.length > 0) {
-                                if (+message.price == 0) {
-                                    this.providerId = message[0].id;
-                                } else {
-                                    this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
-                                        method: 'GET',
-                                        params: {
-                                            cmd: 'reject',
-                                            id: message[0].id
-                                        }
-                                    });
-
-                                    this.#shouldPoll = false;
-                                    this.emit('cancelled', { orderId: this.orderId });
-                                }
-                            } else {
-                                this.#shouldPoll = false;
-                                this.emit('cancelled', { orderId: this.orderId });
-                            }
-                        } catch (err) {
                             this.#shouldPoll = false;
                             this.emit('cancelled', { orderId: this.orderId });
                         }
-
-                        let parsedMessage = {
-                            orderId: this.orderId,
-                            code: currentMessage.pin,
-                            fullText: currentMessage.reply,
-                            providerId: this.providerId
-                        };
-
-                        this.messages.unshift(parsedMessage);
+                    } else {
                         this.emit('new-message', parsedMessage);
+
+                        await this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
+                            method: 'GET',
+                            params: {
+                                cmd: 'reject',
+                                id: this.providerId
+                            }
+                        });
+
+                        this.#shouldPoll = false;
+                        this.emit('cancelled', { orderId: this.orderId });
                     }
+                } catch (err) {
+                    this.emit('new-message', parsedMessage);
+
+                    await this.#client({ // Can't just directly call cancel method or else it will keep looping and failing until expiration time
+                        method: 'GET',
+                        params: {
+                            cmd: 'reject',
+                            id: this.providerId
+                        }
+                    });
+
+                    this.#shouldPoll = false;
+                    this.emit('cancelled', { orderId: this.orderId });
                 }
+
+                // this.messages.unshift(parsedMessage);
+                // this.emit('new-message', parsedMessage);
             }
             // } else if (checkResponse.status === 'Reserved') { // Text has come through
             //     // for (let i = this.messages.length; i < checkResponse.sms.length; i++) {
@@ -219,7 +262,7 @@ class UnitedSMS extends EventEmitter {
             //     this.emit('cancelled', { orderId: this.orderId });
             // }
             
-            this.#checkErrors = 0;
+            // this.#checkErrors = 0;
         } catch (err) {
             console.log(err);
             this.#checkErrors++;
