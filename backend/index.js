@@ -9,7 +9,12 @@ const { services } = require('../phone-number/config.json');
 const { Webhook, MessageBuilder } = require('discord-webhook-node');
 
 const venmo = new VenmoAPI(process.env.VENMO_BUSINESS_TOKEN, process.env.VENMO_BUSINESS_ID);
-const phoneAPI = new PhoneAPI(process.env.SMS_ACTIVATE_KEY, process.env.FIVE_SIM_KEY);
+const phoneAPI = new PhoneAPI({
+    smsActivateKey: process.env.SMS_ACTIVATE_KEY,
+    fiveSimKey: process.env.FIVE_SIM_KEY,
+    unitedSMSUsername: process.env.UNITED_SMS_USERNAME,
+    unitedSMSPassword: process.env.UNITED_SMS_PASSWORD,
+});
 const client = new MongoClient(process.env.MONGO_URI);
 const hook = new Webhook({
     url: "https://discord.com/api/webhooks/1077992935326482574/mF40YRlGilD2mKDzHZ9c_QqyvPoG88rUkpl5jrgru-t63mC7iVjwNQH-gW2I0tKE9Bm5",
@@ -235,25 +240,26 @@ const getNumberForOrder = async (orderId, service) => {
         number = numberRequest.number;
         provider = numberRequest.provider;
     } catch (err) {
+        console.log(err);
         io.to(orderId).emit('error-getting-number');
 
-        let order = awaitingNumberCollection.findOne({ orderId: orderId });
+        // let order = await awaitingNumberCollection.findOne({ orderId: orderId });
 
-        venmo.refundTransaction(order.venmoTransactionId, order.amount)
-            .then(async () => {
-                if (orderId) {
-                    io.to(orderId).emit('refunded');
-                }
+        // venmo.refundTransaction(order.venmoTransactionId, order.amount)
+        //     .then(async () => {
+        //         if (orderId) {
+        //             io.to(orderId).emit('refunded');
+        //         }
 
-                await cancelledOrderCollection.insertOne(order);
-                await awaitingNumberCollection.deleteOne({ orderId: orderId });
-            })
-            .catch((err) => {
-                if (orderId) {
-                    io.to(orderId).emit('refund-error');
-                }
-            });
-        // throw new Error("Couldn't get phone number for service");
+        //         await cancelledOrderCollection.insertOne(order);
+        //         await awaitingNumberCollection.deleteOne({ orderId: orderId });
+        //     })
+        //     .catch((err) => {
+        //         if (orderId) {
+        //             io.to(orderId).emit('refund-error');
+        //         }
+        //     });
+        throw new Error("Couldn't get phone number for service");
     }
 
     let order = await awaitingNumberCollection.findOne({ orderId: orderId });
@@ -269,21 +275,22 @@ const getNumberForOrder = async (orderId, service) => {
     order.expiresAt = smsInstance.expiresAt;
     order.messages = [];
 
-    // Send webhook to discord 
-    let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
-    let embed = new MessageBuilder()
-        .setTitle('Order Confirmed')
-        .setURL(`https://simple-sms.io/order/${orderId}`)
-        .addField('Order ID', `${orderId}`, true)
-        .addField('Service', `${service}`, true)
-        .addField('Number', `${updatedNumber}`, true)
-        .setColor('#fbbf24')
-        .setTimestamp();
+    try {
+        // Send webhook to discord 
+        let updatedNumber = `+${order.number.substring(0, 1)} (${order.number.substring(1, 4)}) ${order.number.substring(4, 7)}-${order.number.substring(7)}`;
+        let embed = new MessageBuilder()
+            .setTitle('Order Confirmed')
+            .setURL(`https://simple-sms.io/order/${orderId}`)
+            .addField('Order ID', `${orderId}`, true)
+            .addField('Service', `${service}`, true)
+            .addField('Number', `${updatedNumber}`, true)
+            .setColor('#fbbf24')
+            .setTimestamp();
 
-
-
-    hook.send(embed);
-
+        hook.send(embed);
+    } catch (e) {
+        // Don't do anything
+    }
 
     await awaitingFirstTextCollection.insertOne(order);
     await awaitingNumberCollection.deleteOne({ orderId: orderId });
@@ -305,8 +312,8 @@ const monitorSms = (smsInstance, orderId) => {
     });
 
     smsInstance.on('cancelled', async (msg) => {
-        console.log('cancelled');
         let orderId = msg.orderId;
+        console.log(`Order ID ${orderId} cancelled`);
 
         try {
             // let isCancelled = await collectionHasOrder(cancelledOrderCollection, orderId);
@@ -359,12 +366,15 @@ const monitorSms = (smsInstance, orderId) => {
                 isFirstText = true;
             } else {
                 order = await activeOrderCollection.findOne({ orderId: orderId });
-                if (order.messages[0].code === code && order.messages[0].fullText === fullText) return;
+                // if (order.messages[0].code === code && order.messages[0].fullText === fullText) return;
             }
+
+            order.providerId = msg.providerId || order.providerId; // Only update providerId if a new one is provided in the msg object
 
             let newMessage = {
                 code: code,
-                fullText: fullText
+                fullText: fullText,
+                providerId: order.providerId
             };
 
             io.to(orderId).emit('new-message', newMessage);
