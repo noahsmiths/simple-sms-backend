@@ -217,7 +217,8 @@ venmo.on('new-transaction', async (tx) => {
         console.log(err);
 
         if (orderId && await collectionHasOrder(awaitingNumberCollection, orderId)) {
-            let order = await awaitingNumberCollection.findOneAndDelete({ orderId: orderId });
+            let order = await awaitingNumberCollection.findOne({ orderId: orderId });
+            await awaitingNumberCollection.deleteOne({ orderId: orderId });
             await cancelledOrderCollection.insertOne(order);
         }
 
