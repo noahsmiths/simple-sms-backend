@@ -69,36 +69,42 @@ io.on('connection', (socket) => {
             return;
         }
 
-        let order;
-        let isCancelled = false;
-
         if (await collectionHasOrder(cancelledOrderCollection, orderId)) {
-            order = await cancelledOrderCollection.findOne({ orderId: orderId });
-            isCancelled = true;
-        } else if (await collectionHasOrder(completedOrderCollection, orderId)) {
-            order = await completedOrderCollection.findOne({ orderId: orderId });
-        } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
-            order = await activeOrderCollection.findOne({ orderId: orderId });
-        } else if (await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
-            order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
-        }
-
-        if (!order) {
-            socket.emit('order-not-found');
+            socket.emit('refunded');
             return;
         }
 
-        socket.join(orderId);
+        if (await collectionHasOrder(completedOrderCollection, orderId) || await collectionHasOrder(activeOrderCollection, orderId) || await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+            socket.emit('order-phone-number');
+        }
+        
+        // let order;
+        // let isCancelled = false;
 
-        socket.emit('order', {
-            number: order.number,
-            // expiresAt: order.expiresAt - 60000,
-            expiresAt: order.expiresAt,
-            service: order.service,
-            messages: order.messages,
-            // messages: [{code: "456789", fullText: "Your code is 456789."}, {code: "890432", fullText: "Confirm with code 890432."}],
-            isCancelled: isCancelled
-        });
+        // if (await collectionHasOrder(completedOrderCollection, orderId)) {
+        //     order = await completedOrderCollection.findOne({ orderId: orderId });
+        // } else if (await collectionHasOrder(activeOrderCollection, orderId)) {
+        //     order = await activeOrderCollection.findOne({ orderId: orderId });
+        // } else if (await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+        //     order = await awaitingFirstTextCollection.findOne({ orderId: orderId });
+        // }
+
+        // if (!order) {
+        //     socket.emit('order-not-found');
+        //     return;
+        // }
+
+        // socket.join(orderId);
+
+        // socket.emit('order', {
+        //     number: order.number,
+        //     // expiresAt: order.expiresAt - 60000,
+        //     expiresAt: order.expiresAt,
+        //     service: order.service,
+        //     messages: order.messages,
+        //     // messages: [{code: "456789", fullText: "Your code is 456789."}, {code: "890432", fullText: "Confirm with code 890432."}],
+        //     isCancelled: isCancelled
+        // });
 
         // setTimeout(() => {
         //     socket.emit('new-message', {
@@ -211,7 +217,8 @@ venmo.on('new-transaction', async (tx) => {
         console.log(err);
 
         if (orderId && await collectionHasOrder(awaitingNumberCollection, orderId)) {
-            await awaitingNumberCollection.deleteOne({ orderId: orderId });
+            let order = await awaitingNumberCollection.findOneAndDelete({ orderId: orderId });
+            await cancelledOrderCollection.insertOne(order);
         }
 
         venmo.refundTransaction(tx.id, tx.amount)
