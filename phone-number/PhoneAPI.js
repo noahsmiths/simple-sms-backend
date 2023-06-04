@@ -93,7 +93,7 @@ class PhoneAPI extends EventEmitter {
                 case "5sim_id":
                     api = new FiveSim(this.#FiveSimAPIKey, orderId);
                 break;
-                case "united_sms":
+                case "united_sms_id":
                     api = new UnitedSMS({ username: this.#UnitedSMSUsername, password: this.#UnitedSMSPassword }, orderId);
                 break;
                 default:
