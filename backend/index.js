@@ -128,6 +128,28 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on('reconnect-order', async (orderId) => {
+        if (!orderId || !isValidUUIDV4(orderId)) {
+            socket.emit('order-not-found');
+            return;
+        }
+
+        if (await collectionHasOrder(awaitingNumberCollection, orderId)) {
+            socket.join(orderId);
+            socket.emit('order-confirmed');
+            return;
+        }
+
+        if (await collectionHasOrder(cancelledOrderCollection, orderId)) {
+            socket.emit('refunded');
+            return;
+        }
+
+        if (await collectionHasOrder(completedOrderCollection, orderId) || await collectionHasOrder(activeOrderCollection, orderId) || await collectionHasOrder(awaitingFirstTextCollection, orderId)) {
+            socket.emit('order-phone-number');
+        }
+    });
+
     console.log("connection made");
 
     socket.on('disconnect', () => {
