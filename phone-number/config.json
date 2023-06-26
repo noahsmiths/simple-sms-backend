@@ -82,7 +82,8 @@
             "service_name": "facebook",
             "sms_activate_id": "fb",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            _sms_id": "Facebook",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
