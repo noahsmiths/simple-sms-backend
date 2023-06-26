@@ -514,6 +514,358 @@
             "provider_to_use": "united_sms_id",
             "price_in_cents": 99
         },
+        "Affirm": {
+            "service_name": "Affirm",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Affirm",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "AWS (Amazon Web Services)": {
+            "service_name": "AWS (Amazon Web Services)",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "AWS",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "CashApp": {
+            "service_name": "CashApp",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "CashApp",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Coinbase": {
+            "service_name": "Coinbase",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Coinbase",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Crypto.com": {
+            "service_name": "Crypto.com",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Crypto.com",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "CVS": {
+            "service_name": "CVS",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "CVS",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Discover": {
+            "service_name": "Discover",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Discover",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Fiverr": {
+            "service_name": "Fiverr",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Fiverr",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Champs": {
+            "service_name": "Champs",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Champs",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "FootLocker": {
+            "service_name": "FootLocker",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "FootLocker",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "G2A": {
+            "service_name": "G2A",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "G2A",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Gemini": {
+            "service_name": "Gemini",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Gemini",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Privacy": {
+            "service_name": "Privacy",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Generic",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "GoFundMe": {
+            "service_name": "GoFundMe",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "GoFundMe",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Gopuff": {
+            "service_name": "Gopuff",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Gopuff",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Grailed": {
+            "service_name": "Grailed",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Grailed",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "GroupMe": {
+            "service_name": "GroupMe",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "GroupMe",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Hinge": {
+            "service_name": "Hinge",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Hinge",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Hopper": {
+            "service_name": "Hopper",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Hopper",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Indeed": {
+            "service_name": "Indeed",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Indeed",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Instacart": {
+            "service_name": "Instacart",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Instacart",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Intuit": {
+            "service_name": "Intuit",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Intuit",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Klarna": {
+            "service_name": "Klarna",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Klarna",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Match": {
+            "service_name": "Match",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Match",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Mercari": {
+            "service_name": "Mercari",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Mercari",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "MoneyGram": {
+            "service_name": "MoneyGram",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "MoneyGram",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "MoonPay": {
+            "service_name": "MoonPay",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "MoonPay",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "OkCupid": {
+            "service_name": "OkCupid",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "OkCupid",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "OpenAI": {
+            "service_name": "OpenAI",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "OpenAI",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Oracle": {
+            "service_name": "Oracle",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Oracle",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Payoneer": {
+            "service_name": "Payoneer",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Payoneer",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Postmates": {
+            "service_name": "Postmates",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Postmates",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "SamsungPay": {
+            "service_name": "SamsungPay",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "SamsungPay",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Signal": {
+            "service_name": "Signal",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Signal",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Square": {
+            "service_name": "Square",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Square",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Sofi": {
+            "service_name": "Sofi",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Sofi",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Stripe": {
+            "service_name": "Stripe",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Stripe",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Target": {
+            "service_name": "Target",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Target",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "TurboTax": {
+            "service_name": "TurboTax",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "TurboTax",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Twilio": {
+            "service_name": "Twilio",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Twilio",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Upwork": {
+            "service_name": "Upwork",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Upwork",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Walmart": {
+            "service_name": "Walmart",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Walmart",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "Webull": {
+            "service_name": "Webull",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Webull",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
+        "YikYak": {
+            "service_name": "YikYak",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "YikYak",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
+        },
         "Other (Unlisted)": {
             "service_name": "Other (Unlisted)",
             "sms_activate_id": "ot",
