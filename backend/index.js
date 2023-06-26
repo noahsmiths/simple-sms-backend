@@ -117,7 +117,7 @@ io.on('connection', (socket) => {
                 let smsInstance = await activeSMSMonitors.get(orderId);
                 await smsInstance.cancel();
 
-                hook.error("Order Cancelled", `Order ID`, `${orderId}`)
+                // hook.error("Order Cancelled", `Order ID`, `${orderId}`)
             }
             // else if (collectionHasOrder(awaitingFirstTextCollection, orderId)) {
 
@@ -355,12 +355,16 @@ const monitorSms = (smsInstance, orderId) => {
                             activeSMSMonitors.delete(orderId);
                             smsInstance.stopMonitoring(true);
                             io.to(orderId).emit('refunded');
+
+                            hook.error("Order Cancelled", `Order ID`, `${orderId}`);
                         }
                     })
                     .catch((err) => {
                         if (orderId) {
                             smsInstance.startMonitoring();
                             io.to(orderId).emit('refund-error');
+
+                            hook.error("Order Cancellation Error", `Order ID`, `${orderId}`);
                         }
                     });
 
