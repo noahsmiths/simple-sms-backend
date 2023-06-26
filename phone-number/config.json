@@ -180,7 +180,7 @@
             "sms_activate_id": "oi",
             "5sim_id": "tinder",
             "united_sms_id": "Tinder",
-            "provider_to_use": "sms_activate_id",
+            "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual32",
             "price_in_cents": 99,
             "country": 187,
