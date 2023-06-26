@@ -23,7 +23,8 @@
             "service_name": "Viber",
             "sms_activate_id": "vi",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Viber",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -43,7 +44,8 @@
             "service_name": "WeChat",
             "sms_activate_id": "wb",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "WeChat",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -125,7 +127,8 @@
             "service_name": "Instagram",
             "sms_activate_id": "ig",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Instagram",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -134,7 +137,8 @@
             "service_name": "Microsoft",
             "sms_activate_id": "mm",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Microsoft",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -143,17 +147,19 @@
             "service_name": "Airbnb",
             "sms_activate_id": "uk",
             "5sim_id": "airbnb",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Airbnb",
+            "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
-        "Line messenger": {
-            "service_name": "Line messenger",
+        "Line": {
+            "service_name": "Line",
             "sms_activate_id": "me",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Line",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -476,10 +482,18 @@
             "sms_activate_id": "yy",
             "5sim_id": "N/A",
             "united_sms_id": "Venmo",
-            "provider_to_use": "sms_activate_id",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
+        },
+        "Adidas": {
+            "service_name": "Adidas",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Adidas",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 99
         },
         "Other (Unlisted)": {
             "service_name": "Other (Unlisted)",
