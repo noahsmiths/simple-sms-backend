@@ -522,8 +522,8 @@
             "provider_to_use": "united_sms_id",
             "price_in_cents": 99
         },
-        "AWS (Amazon Web Services)": {
-            "service_name": "AWS (Amazon Web Services)",
+        "AWS": {
+            "service_name": "AWS",
             "sms_activate_id": "N/A",
             "5sim_id": "N/A",
             "united_sms_id": "AWS",
