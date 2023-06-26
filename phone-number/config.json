@@ -168,7 +168,8 @@
             "service_name": "Yahoo",
             "sms_activate_id": "mb",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Yahoo",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -177,7 +178,8 @@
             "service_name": "Steam",
             "sms_activate_id": "mt",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Steam",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -197,7 +199,8 @@
             "service_name": "AOL",
             "sms_activate_id": "pm",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "AOL",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -268,7 +271,8 @@
             "service_name": "Ticketmaster",
             "sms_activate_id": "gp",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Ticketmaster",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -277,7 +281,8 @@
             "service_name": "Amazon",
             "sms_activate_id": "am",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Amazon",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -295,7 +300,8 @@
             "service_name": "Snapchat",
             "sms_activate_id": "fu",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Snapchat",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -336,7 +342,8 @@
             "service_name": "eBay",
             "sms_activate_id": "dh",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Ebay",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -345,7 +352,8 @@
             "service_name": "Grindr",
             "sms_activate_id": "yw",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Generic",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -354,7 +362,8 @@
             "service_name": "PayPal",
             "sms_activate_id": "ts",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "PayPal",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -363,7 +372,8 @@
             "service_name": "Blizzard",
             "sms_activate_id": "bz",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Blizzard",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -372,7 +382,8 @@
             "service_name": "Craigslist",
             "sms_activate_id": "wc",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Craigslist",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -381,7 +392,8 @@
             "service_name": "OfferUp",
             "sms_activate_id": "zm",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "OfferUp",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -390,7 +402,8 @@
             "service_name": "Moneylion",
             "sms_activate_id": "qo",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "MoneyLion",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -399,7 +412,8 @@
             "service_name": "Apple",
             "sms_activate_id": "wx",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Apple",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -417,7 +431,8 @@
             "service_name": "Wise",
             "sms_activate_id": "bo",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Wise",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -445,7 +460,8 @@
             "service_name": "Lyft",
             "sms_activate_id": "tu",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Lyft",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -454,7 +470,8 @@
             "service_name": "Skype",
             "sms_activate_id": "rc",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Skype",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -463,7 +480,8 @@
             "service_name": "Bumble",
             "sms_activate_id": "mo",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "Bumble",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
@@ -472,7 +490,8 @@
             "service_name": "DoorDash",
             "sms_activate_id": "ac",
             "5sim_id": "N/A",
-            "provider_to_use": "sms_activate_id",
+            "united_sms_id": "DoorDash",
+            "provider_to_use": "united_sms_id",
             "price_in_cents": 99,
             "country": 12,
             "number_valid_time_in_ms": 1200000
