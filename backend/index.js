@@ -356,6 +356,8 @@ const monitorSms = (smsInstance, orderId) => {
                             smsInstance.stopMonitoring(true);
                             io.to(orderId).emit('refunded');
 
+                            console.log(`Order ${orderId} refunded`);
+
                             hook.error("Order Cancelled", `Order ID`, `${orderId}`);
                         }
                     })
@@ -363,6 +365,8 @@ const monitorSms = (smsInstance, orderId) => {
                         if (orderId) {
                             smsInstance.startMonitoring();
                             io.to(orderId).emit('refund-error');
+
+                            console.error(err);
 
                             hook.error("Order Cancellation Error", `Order ID`, `${orderId}`);
                         }
