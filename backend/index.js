@@ -366,9 +366,11 @@ const monitorSms = (smsInstance, orderId) => {
                             smsInstance.startMonitoring();
                             io.to(orderId).emit('refund-error');
 
-                            console.error(err);
-
-                            hook.error("Order Cancellation Error", `Order ID`, `${orderId}`);
+                            if (err?.data?.status === 'issued') {
+                                hook.error("Order Cancelled", `Order ID`, `${orderId}`);
+                            } else {
+                                hook.error("Order Cancellation Error", `Order ID`, `${orderId}`);
+                            }
                         }
                     });
 

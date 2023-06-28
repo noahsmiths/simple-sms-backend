@@ -5,7 +5,7 @@
             "sms_activate_id": "vk",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 50,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -15,7 +15,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "WhatsApp",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -25,7 +25,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Viber",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -36,7 +36,7 @@
             "united_sms_id": "Telegram",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual28",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -46,7 +46,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "WeChat",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 60,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -56,7 +56,7 @@
             "5sim_id": "google",
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 187,
             "number_valid_time_in_ms": 1200000
         },
@@ -66,7 +66,7 @@
             "5sim_id": "google",
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 187,
             "number_valid_time_in_ms": 1200000
         },
@@ -76,7 +76,7 @@
             "5sim_id": "google",
             "provider_to_use": "sms_activate_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 187,
             "number_valid_time_in_ms": 1200000
         },
@@ -86,7 +86,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Facebook",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -97,7 +97,7 @@
             "united_sms_id": "Twitter",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual32",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -108,7 +108,7 @@
             "united_sms_id": "Uber",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -119,7 +119,7 @@
             "united_sms_id": "Uber",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -129,7 +129,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Instagram",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -139,7 +139,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Microsoft",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -150,7 +150,7 @@
             "united_sms_id": "Airbnb",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -160,7 +160,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Line",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -170,7 +170,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Yahoo",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 45,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -180,7 +180,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Steam",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -191,7 +191,7 @@
             "united_sms_id": "Tinder",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual32",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 187,
             "number_valid_time_in_ms": 1200000
         },
@@ -201,7 +201,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "AOL",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -212,7 +212,7 @@
             "united_sms_id": "LinkedIn",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -221,7 +221,7 @@
             "sms_activate_id": "qq",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 55,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -232,7 +232,7 @@
             "united_sms_id": "Netflix",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -243,7 +243,7 @@
             "united_sms_id": "Discord",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual32",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -254,7 +254,7 @@
             "united_sms_id": "TikTok",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -263,7 +263,7 @@
             "sms_activate_id": "zh",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 55,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -273,7 +273,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Ticketmaster",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -283,7 +283,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Amazon",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -292,7 +292,7 @@
             "sms_activate_id": "dp",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 55,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -302,7 +302,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Snapchat",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -313,7 +313,7 @@
             "united_sms_id": "AliPay",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -324,7 +324,7 @@
             "united_sms_id": "Alibaba",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual8",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         },
@@ -334,7 +334,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Nike",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -344,7 +344,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Ebay",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -354,7 +354,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Generic",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -364,7 +364,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "PayPal",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -374,7 +374,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Blizzard",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -384,7 +384,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Craigslist",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 75,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -394,7 +394,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "OfferUp",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 70,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -404,7 +404,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "MoneyLion",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -414,7 +414,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Apple",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -423,7 +423,7 @@
             "sms_activate_id": "hb",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -433,7 +433,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Wise",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -442,7 +442,7 @@
             "sms_activate_id": "yg",
             "5sim_id": "N/A",
             "provider_to_use": "sms_activate_id",
-            "price_in_cents": 99,
+            "price_in_cents": 55,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -462,7 +462,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Lyft",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -472,7 +472,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Skype",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -482,7 +482,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Bumble",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 80,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -492,7 +492,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "DoorDash",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -502,7 +502,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Venmo",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": 12,
             "number_valid_time_in_ms": 1200000
         },
@@ -512,7 +512,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Adidas",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Affirm": {
             "service_name": "Affirm",
@@ -520,7 +520,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Affirm",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "AWS": {
             "service_name": "AWS",
@@ -528,7 +528,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "AWS",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "CashApp": {
             "service_name": "CashApp",
@@ -536,7 +536,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "CashApp",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "Coinbase": {
             "service_name": "Coinbase",
@@ -544,7 +544,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Coinbase",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "Crypto.com": {
             "service_name": "Crypto.com",
@@ -552,7 +552,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Crypto.com",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "CVS": {
             "service_name": "CVS",
@@ -560,7 +560,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "CVS",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Discover": {
             "service_name": "Discover",
@@ -568,7 +568,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Discover",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Fiverr": {
             "service_name": "Fiverr",
@@ -576,7 +576,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Fiverr",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 50
         },
         "Champs": {
             "service_name": "Champs",
@@ -584,7 +584,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Champs",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 60
         },
         "FootLocker": {
             "service_name": "FootLocker",
@@ -592,7 +592,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "FootLocker",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 60
         },
         "G2A": {
             "service_name": "G2A",
@@ -600,7 +600,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "G2A",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Gemini": {
             "service_name": "Gemini",
@@ -608,7 +608,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Gemini",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "Privacy": {
             "service_name": "Privacy",
@@ -616,7 +616,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Generic",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "GoFundMe": {
             "service_name": "GoFundMe",
@@ -624,7 +624,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "GoFundMe",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Gopuff": {
             "service_name": "Gopuff",
@@ -632,7 +632,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Gopuff",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Grailed": {
             "service_name": "Grailed",
@@ -640,7 +640,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Grailed",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "GroupMe": {
             "service_name": "GroupMe",
@@ -648,7 +648,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "GroupMe",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Hinge": {
             "service_name": "Hinge",
@@ -656,7 +656,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Hinge",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "Hopper": {
             "service_name": "Hopper",
@@ -664,7 +664,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Hopper",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Indeed": {
             "service_name": "Indeed",
@@ -672,7 +672,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Indeed",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 70
         },
         "Instacart": {
             "service_name": "Instacart",
@@ -680,7 +680,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Instacart",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Intuit": {
             "service_name": "Intuit",
@@ -688,7 +688,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Intuit",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Klarna": {
             "service_name": "Klarna",
@@ -696,7 +696,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Klarna",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Match": {
             "service_name": "Match",
@@ -704,7 +704,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Match",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "Mercari": {
             "service_name": "Mercari",
@@ -712,7 +712,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Mercari",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "MoneyGram": {
             "service_name": "MoneyGram",
@@ -720,7 +720,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "MoneyGram",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "MoonPay": {
             "service_name": "MoonPay",
@@ -728,7 +728,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "MoonPay",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "OkCupid": {
             "service_name": "OkCupid",
@@ -736,7 +736,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "OkCupid",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "OpenAI": {
             "service_name": "OpenAI",
@@ -744,7 +744,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "OpenAI",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Oracle": {
             "service_name": "Oracle",
@@ -752,7 +752,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Oracle",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Payoneer": {
             "service_name": "Payoneer",
@@ -760,7 +760,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Payoneer",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Postmates": {
             "service_name": "Postmates",
@@ -768,7 +768,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Postmates",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 85
         },
         "SamsungPay": {
             "service_name": "SamsungPay",
@@ -776,7 +776,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "SamsungPay",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Signal": {
             "service_name": "Signal",
@@ -784,7 +784,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Signal",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Square": {
             "service_name": "Square",
@@ -792,7 +792,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Square",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Sofi": {
             "service_name": "Sofi",
@@ -800,7 +800,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Sofi",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Stripe": {
             "service_name": "Stripe",
@@ -808,7 +808,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Stripe",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Target": {
             "service_name": "Target",
@@ -816,7 +816,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Target",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "TurboTax": {
             "service_name": "TurboTax",
@@ -824,7 +824,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "TurboTax",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Twilio": {
             "service_name": "Twilio",
@@ -832,7 +832,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Twilio",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "Upwork": {
             "service_name": "Upwork",
@@ -840,7 +840,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Upwork",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Walmart": {
             "service_name": "Walmart",
@@ -848,7 +848,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Walmart",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 75
         },
         "Webull": {
             "service_name": "Webull",
@@ -856,7 +856,7 @@
             "5sim_id": "N/A",
             "united_sms_id": "Webull",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
         },
         "YikYak": {
             "service_name": "YikYak",
@@ -864,7 +864,15 @@
             "5sim_id": "N/A",
             "united_sms_id": "YikYak",
             "provider_to_use": "united_sms_id",
-            "price_in_cents": 99
+            "price_in_cents": 80
+        },
+        "Poshmark": {
+            "service_name": "Poshmark",
+            "sms_activate_id": "N/A",
+            "5sim_id": "N/A",
+            "united_sms_id": "Poshmark",
+            "provider_to_use": "united_sms_id",
+            "price_in_cents": 80
         },
         "Other (Unlisted)": {
             "service_name": "Other (Unlisted)",
@@ -873,7 +881,7 @@
             "united_sms_id": "Generic",
             "provider_to_use": "united_sms_id",
             "5sim_operator": "virtual28",
-            "price_in_cents": 99,
+            "price_in_cents": 85,
             "country": "usa",
             "number_valid_time_in_ms": 1200000
         }
